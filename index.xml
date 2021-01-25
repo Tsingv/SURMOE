@@ -6,7 +6,16 @@
     <description>Recent content on No Wander</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 11 Jan 2021 16:28:39 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 25 Jan 2021 19:39:00 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>LUKS&amp;TPM2</title>
+      <link>/post/lukstpm2/</link>
+      <pubDate>Mon, 25 Jan 2021 19:39:00 +0800</pubDate>
+      
+      <guid>/post/lukstpm2/</guid>
+      <description>背景 同样的，在进行了全盘加密后每次boot都需要输入密钥对根目录进行解密，久而久之就会觉得挺麻烦的。在Windows下使用的BitLocke</description>
+    </item>
+    
     <item>
       <title>Forst</title>
       <link>/post/forst/</link>
