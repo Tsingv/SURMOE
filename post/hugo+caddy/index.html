@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+<meta name="author" content="">
+
+
+
+<meta name="description" content="#环境配置
+
+Hugo : hugo的下载地址(github)
+Caddy : 官网下载,需要选择http.git,web.hook插件
+推荐下载新版本，原因为apt的较老，当然能运作也无伤大雅
+">
+
+
+
+
+<meta name="keywords" content="">
+
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Hugo&#43;Caddy" />
+<meta name="twitter:description" content="#环境配置
+
+Hugo : hugo的下载地址(github)
+Caddy : 官网下载,需要选择http.git,web.hook插件
+推荐下载新版本，原因为apt的较老，当然能运作也无伤大雅
+" />
+
+
+<link rel="canonical" href="../../post/hugo&#43;caddy/">
+
+
+<link media="screen" rel="stylesheet" href='css/common.css'>
+<link media="screen" rel="stylesheet" href='css/content.css'>
+<link media="screen" rel="stylesheet" href='css/highlight.css'>
+
+
+
+<title>Hugo&#43;Caddy - No Wander</title>
+
+
+
+
+
+  <link rel="stylesheet" href='css/single.css'>
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="header">
+  <h1>
+    <a href="">No Wander</a>
+  </h1>
+
+  <nav>
+    
+  </nav>
+</header>
+
+    <main id="main" class="post">
+      
+      
+      
+      <h1>Hugo&#43;Caddy</h1>
+      
+      <div class="content">
+        <p>#环境配置</p>
+<blockquote>
+<p>Hugo : <a href="https://github.com/gohugoio/hugo/releases">hugo的下载地址(github)</a><br>
+Caddy : <a href="https://caddyserver.com/download">官网下载,需要选择http.git,web.hook插件</a><br>
+<em>推荐下载新版本，原因为apt的较老，当然能运作也无伤大雅</em></p>
+</blockquote>
+<p>#Hugo的配置
+我们假设已经安装无误了，那么我们将开始建立静态网站</p>
+<pre><code>hugo new site newsite
+//会生成一个叫 newsite 的文件夹，存放你的站点里面有一些文件夹，但是，是空的
+hugo new post/first.md
+//这时会在content目录下生成 post/first.md 这个文件，编辑它，格式是Markdown，前面draft一行，删去为正式的文章
+hugo server
+//这时hugo已经在本地运行了，浏览器访问 http://localhost:1313 可以看到效果，但是，是白的对吗:-)
+</code></pre><p>我们要想看到内容就要为 hugo 选择一款主题，可以自己写也可以在<a href="https://themes.gohugo.io/">Hugo主题</a>这里选择，然后按照上面的操作保存下来。<br>
+假设我们的主题名称是 base16</p>
+<pre><code>hugo server --theme=base16          //调试使用
+或
+hugo --destination=newsite/public --theme=base16        //静态生成
+</code></pre><p>这时网站已经有了第一篇博客，就是 first.md 经过渲染得到的。渲染后的静态网页会放在 public 文件夹，但是注意到如果使用hugo的调试模式，并不会保存渲染后的静态网页。<br>
+我们可以在后面加上 &ndash;baseURL='' 指定 baseURL，也可以在 config.toml 中修改。理论上是修改为你的域名但是我确实设置为'/&lsquo;后正常的，同时在config.toml中添加 &ldquo;relativeurls = true&rdquo; 使用相对路径规避一些问题。<br>
+在指定了主题后，我们再次打开调试模式就能看到内容了。至此本地的任务完成了。</p>
+<p>考虑在根目录使用git同步，假设你已经同步到了你的remote git server 然后也有了token，这里我使用的github，上传的时候使用ssh方式push，同样的，pull也是ssh方式，这样可以使用私有库。</p>
+<h2 id="服务器端">服务器端</h2>
+<p>此处po上CaddyFile代码</p>
+<pre><code>  clearain.cn {
+	tls email@example.cn
+	root /var/www/Blog/public
+	gzip
+	git {
+		repo github.com/Your_account/blog.git
+		branch master
+		path /var/www/Blog
+		then hugo --destination=/var/www/Blog/public --theme=hugo-base16-theme
+    #这里是在获得push信号后自动使用hugo渲染，要指明目标文件夹和主题
+    #注意git的话，不要把有改动的文件夹添加进来
+		hook /webhookgit Here_is_your_token
+		hook_type github
+	}
+}
+</code></pre><p>如上，完成。若是有其他的问题，，，百度怎么样，比如hook的token和ssh密钥。:-D</p>
+      </div>
+      <div class="paginator">
+        
+        <a></a>
+        
+        
+        <a class="link" href="../../post/brower/">next →</a>
+        
+      </div>
+      <div class="comment">
+        
+      </div>
+      
+    </main>
+    <footer id="footer">
+  <div>
+    <span>© 2019</span> - <span>2021</span>
+  </div>
+
+  <div>
+    <span>Powered by </span>
+    <a class="link" href="https://gohugo.io/">Hugo</a>
+  </div>
+
+  <div class="footnote">
+    <span></span>
+  </div>
+</footer>
+
+  </div>
+  
+
+
+</body>
+
+</html>

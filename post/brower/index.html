@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+<meta name="author" content="">
+
+
+
+<meta name="description" content="标记语言
+HTML
+XML 人类不友好
+脚本
+JavaScript
+渲染引擎
+简称“浏览器内核”
+Web 存储
+跨域资源共享
+CORS
+XMLHttpRequest
+Access-Control-Allow-Origin:*">
+
+
+
+
+<meta name="keywords" content="">
+
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Brower" />
+<meta name="twitter:description" content="标记语言
+HTML
+XML 人类不友好
+脚本
+JavaScript
+渲染引擎
+简称“浏览器内核”
+Web 存储
+跨域资源共享
+CORS
+XMLHttpRequest
+Access-Control-Allow-Origin:*" />
+
+
+<link rel="canonical" href="../../post/brower/">
+
+
+<link media="screen" rel="stylesheet" href='css/common.css'>
+<link media="screen" rel="stylesheet" href='css/content.css'>
+<link media="screen" rel="stylesheet" href='css/highlight.css'>
+
+
+
+<title>Brower - No Wander</title>
+
+
+
+
+
+  <link rel="stylesheet" href='css/single.css'>
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="header">
+  <h1>
+    <a href="">No Wander</a>
+  </h1>
+
+  <nav>
+    
+  </nav>
+</header>
+
+    <main id="main" class="post">
+      
+      
+      
+      <h1>Brower</h1>
+      
+      <div class="content">
+        <h2 id="标记语言">标记语言</h2>
+<p>HTML<br>
+XML 人类不友好</p>
+<h2 id="脚本">脚本</h2>
+<p>JavaScript</p>
+<h2 id="渲染引擎">渲染引擎</h2>
+<p>简称“浏览器内核”</p>
+<h2 id="web-存储">Web 存储</h2>
+<h2 id="跨域资源共享">跨域资源共享</h2>
+<p>CORS<br>
+XMLHttpRequest<br>
+Access-Control-Allow-Origin:*</p>
+<h2 id="html5">HTML5</h2>
+<p><strong>WebSocket</strong><br>
+<strong>Web Worker</strong><br>
+<strong>WebRTC</strong><br>
+<strong>历史</strong></p>
+<h2 id="隐患">隐患</h2>
+<p><em>Bug、漏洞、脆弱性、缺陷</em><br>
+《黑客攻防技术宝典》</p>
+<h2 id="http首部安全特征">HTTP首部安全特征</h2>
+<ul>
+<li>内容安全策略</li>
+<li>安全cookie标志</li>
+<li>HttpOnly cookie标志</li>
+<li>X-Content-Type-Options</li>
+<li>Strict-Transport-Security</li>
+</ul>
+<h2 id="沙箱">沙箱</h2>
+<ul>
+<li>浏览器沙箱</li>
+<li>Iframe沙箱</li>
+</ul>
+<h2 id="混入内容机制">混入内容（机制）</h2>
+<p>HTTPS+HTTP</p>
+<h2 id="攻击面">攻击面</h2>
+<ul>
+<li>升级速度</li>
+<li>静默更新</li>
+<li>扩展<br>
+常见的XSS隐患</li>
+<li>插件</li>
+</ul>
+<p>Fuzzy测试&ndash;&gt;各式各样模糊测试反应</p>
+<h2 id="加密通信">加密通信</h2>
+<h2 id="同源策略">同源策略</h2>
+<p>#SOMETHING<br>
+URI  统一资源定位符<br>
+URL  统一资源标识符<br>
+URN  统一资源名称</p>
+<p>escape()<br>
+encodeURI()<br>
+encodeURIComponent()</p>
+<p>DOM:Document,Object,Model<br>
+iframe&gt;内联框架当前文档中嵌入另一个文档</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">script</span>&gt;<span style="color:#a6e22e">alert</span>(<span style="color:#ae81ff">1</span>)&lt;/<span style="color:#f92672">script</span>&gt;
+&lt;<span style="color:#f92672">img</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">#</span> <span style="color:#a6e22e">onerror</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;alert(1)&#34;</span> /&gt;
+&lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;x&#34;</span> <span style="color:#a6e22e">onmouseover</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;alert(1)&#34;</span> /&gt;
+&lt;<span style="color:#f92672">iframe</span> <span style="color:#a6e22e">sec</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;javascript:alert(1)&#34;</span>&gt;&lt;/<span style="color:#f92672">iframe</span>&gt;
+&lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;javascript:alert(1)&#34;</span>&gt;x&lt;/<span style="color:#f92672">a</span>&gt;
+</code></pre></div><h2 id="ajax风险">AJAX风险</h2>
+<p>Asynchronous JavaScript And XML</p>
+<ul>
+<li>创建快速动态网页的技术</li>
+<li>部分网页更新</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">load</span>()
+{
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">xmlhttp</span>;
+    <span style="color:#a6e22e">xmlhttp</span><span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> <span style="color:#a6e22e">XMLHttpRequest</span>();
+    <span style="color:#a6e22e">xmlhttp</span>.<span style="color:#a6e22e">onreadystatechange</span><span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>()
+    {
+        <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">xmlhttp</span>.<span style="color:#a6e22e">readyState</span><span style="color:#f92672">==</span><span style="color:#ae81ff">4</span><span style="color:#f92672">&amp;&amp;</span><span style="color:#a6e22e">xmlhttp</span>.<span style="color:#a6e22e">status</span><span style="color:#f92672">==</span><span style="color:#ae81ff">200</span>)
+        {
+            document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;muDiv&#39;</span>).<span style="color:#a6e22e">innerHTML</span><span style="color:#f92672">=</span><span style="color:#a6e22e">xmlhttp</span>.<span style="color:#a6e22e">responseText</span>;
+        }
+    }
+    <span style="color:#a6e22e">xmlhttp</span>.<span style="color:#a6e22e">open</span>(<span style="color:#e6db74">&#34;GET&#34;</span>,<span style="color:#e6db74">&#34;info.txt&#34;</span>,<span style="color:#66d9ef">true</span>);
+    <span style="color:#a6e22e">xmlhttp</span>.<span style="color:#a6e22e">send</span>();
+}
+</code></pre></div><h2 id="cookie安全">Cookie安全</h2>
+<p>CSRF<br>
+Cookie重要机制&hellip;</p>
+<h2 id="本地存储风险">本地存储风险</h2>
+<ul>
+<li>Cookie</li>
+<li>UsreData</li>
+<li>LocalStorage
+<ul>
+<li>HTML5的LocalStorage是大势所趋</li>
+<li>LocalStorage无法跨浏览器存在</li>
+<li>LocalStorage存储的数据永久存在</li>
+</ul>
+</li>
+<li>Local Database</li>
+<li>FlashCookie</li>
+<li>JavaScript函数劫持
+<ul>
+<li>在目标函数执行前重写函数</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">    <span style="color:#a6e22e">vap</span> <span style="color:#a6e22e">_eval</span><span style="color:#f92672">=</span>eval;
+    eval <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">x</span>){
+      <span style="color:#66d9ef">if</span>(<span style="color:#66d9ef">typeof</span>(<span style="color:#a6e22e">x</span>)<span style="color:#f92672">==</span><span style="color:#e6db74">&#39;undefined&#39;</span>){<span style="color:#66d9ef">return</span>;}
+      <span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">x</span>);
+      <span style="color:#a6e22e">_eval</span>(<span style="color:#a6e22e">x</span>);
+    };
+     eval(<span style="color:#e6db74">&#39;alert(1)&#39;</span>);
+</code></pre></div><p>$$ADT=(A,D,T)$$</p>
+      </div>
+      <div class="paginator">
+        
+        <a class="link" href="../../post/hugo&#43;caddy/">← prev</a>
+        
+        
+        <a class="link" href="../../post/datastruct/">next →</a>
+        
+      </div>
+      <div class="comment">
+        
+      </div>
+      
+    </main>
+    <footer id="footer">
+  <div>
+    <span>© 2019</span> - <span>2021</span>
+  </div>
+
+  <div>
+    <span>Powered by </span>
+    <a class="link" href="https://gohugo.io/">Hugo</a>
+  </div>
+
+  <div class="footnote">
+    <span></span>
+  </div>
+</footer>
+
+  </div>
+  
+
+
+</body>
+
+</html>

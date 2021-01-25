@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Miscs on No Wander</title>
+    <link>/misc/</link>
+    <description>Recent content in Miscs on No Wander</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 11 Jan 2021 16:02:35 +0800</lastBuildDate><atom:link href="/misc/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>First</title>
+      <link>/misc/first/</link>
+      <pubDate>Mon, 11 Jan 2021 16:02:35 +0800</pubDate>
+      
+      <guid>/misc/first/</guid>
+      <description>I build my site again, this time no deploy with Github.中文测试</description>
+    </item>
+    
+  </channel>
+</rss>
