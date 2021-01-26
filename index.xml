@@ -6,12 +6,14 @@
     <description>Recent content on No Wander</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <managingEditor>tsingv@outlook.com (Tsingv)</managingEditor>
+    <webMaster>tsingv@outlook.com (Tsingv)</webMaster>
     <lastBuildDate>Mon, 25 Jan 2021 19:39:00 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>LUKS&amp;TPM2</title>
       <link>/post/lukstpm2/</link>
       <pubDate>Mon, 25 Jan 2021 19:39:00 +0800</pubDate>
-      
+      <author>tsingv@outlook.com (Tsingv)</author>
       <guid>/post/lukstpm2/</guid>
       <description>背景 同样的，在进行了全盘加密后每次boot都需要输入密钥对根目录进行解密，久而久之就会觉得挺麻烦的。在Windows下使用的BitLocke</description>
     </item>
@@ -20,7 +22,7 @@
       <title>Forst</title>
       <link>/post/forst/</link>
       <pubDate>Mon, 11 Jan 2021 16:28:39 +0800</pubDate>
-      
+      <author>tsingv@outlook.com (Tsingv)</author>
       <guid>/post/forst/</guid>
       <description>中文测试 $\int_1^3$</description>
     </item>
@@ -29,7 +31,7 @@
       <title>First</title>
       <link>/misc/first/</link>
       <pubDate>Mon, 11 Jan 2021 16:02:35 +0800</pubDate>
-      
+      <author>tsingv@outlook.com (Tsingv)</author>
       <guid>/misc/first/</guid>
       <description>I build my site again, this time no deploy with Github.中文测试</description>
     </item>
@@ -38,7 +40,7 @@
       <title>Awk</title>
       <link>/post/awk/</link>
       <pubDate>Tue, 04 Feb 2020 15:20:37 +0800</pubDate>
-      
+      <author>tsingv@outlook.com (Tsingv)</author>
       <guid>/post/awk/</guid>
       <description>awk Useage 1.命令行方式 awk [-F field-separator] &amp;#39;commands&amp;#39; input-file(s) 其中，commands 是真正awk命令，[-F域分隔符]是可选的。 input-file(s) 是待处理的文件。 在awk中，文件的每一行中，</description>
     </item>
@@ -47,7 +49,7 @@
       <title>Dm-Crypt</title>
       <link>/post/dm-crypt/</link>
       <pubDate>Tue, 28 Jan 2020 20:11:23 +0800</pubDate>
-      
+      <author>tsingv@outlook.com (Tsingv)</author>
       <guid>/post/dm-crypt/</guid>
       <description>起因 在编程随想上看到了linux下的全盘加密，我觉得我是有这样的需求的，因此参阅一些资料完成了全盘的加密。 操作 首先对磁盘进行备份，这里使用的</description>
     </item>
@@ -56,7 +58,7 @@
       <title>Things</title>
       <link>/post/things/</link>
       <pubDate>Thu, 16 Jan 2020 23:40:10 +0800</pubDate>
-      
+      <author>tsingv@outlook.com (Tsingv)</author>
       <guid>/post/things/</guid>
       <description>界面不是要花哨和酷炫，而是要实用，要让生产力达到最大化 过程化考核是来真的不是其他的 英语是硬伤 惊喜总是陪伴着的</description>
     </item>
@@ -65,7 +67,7 @@
       <title>Welcome</title>
       <link>/welcome/</link>
       <pubDate>Sat, 11 Jan 2020 16:36:39 +0800</pubDate>
-      
+      <author>tsingv@outlook.com (Tsingv)</author>
       <guid>/welcome/</guid>
       <description>Welcome page, 你好世界：</description>
     </item>
@@ -74,7 +76,7 @@
       <title>WaylandTest</title>
       <link>/post/waylandtest/</link>
       <pubDate>Mon, 16 Dec 2019 19:20:12 +0800</pubDate>
-      
+      <author>tsingv@outlook.com (Tsingv)</author>
       <guid>/post/waylandtest/</guid>
       <description>Wayland First? Test 不知道怎么说，Wayland是个新东西而且理论上确实比X更加的高效，但是不幸的是其还是太新的，很多应用并没有适配wayland协议，导</description>
     </item>
@@ -83,7 +85,7 @@
       <title>DataStruct</title>
       <link>/post/datastruct/</link>
       <pubDate>Thu, 24 Oct 2019 16:49:09 +0800</pubDate>
-      
+      <author>tsingv@outlook.com (Tsingv)</author>
       <guid>/post/datastruct/</guid>
       <description>DataStruct a[n][m] = a + m*n + m</description>
     </item>
@@ -92,7 +94,7 @@
       <title>Brower</title>
       <link>/post/brower/</link>
       <pubDate>Mon, 09 Sep 2019 17:43:42 +0800</pubDate>
-      
+      <author>tsingv@outlook.com (Tsingv)</author>
       <guid>/post/brower/</guid>
       <description>&lt;h2 id=&#34;标记语言&#34;&gt;标记语言&lt;/h2&gt;
 &lt;p&gt;HTML&lt;br&gt;
@@ -112,7 +114,7 @@ Access-Control-Allow-Origin:*&lt;/p&gt;</description>
       <title>Hugo&#43;Caddy</title>
       <link>/post/hugo&#43;caddy/</link>
       <pubDate>Sat, 07 Sep 2019 00:07:31 +0800</pubDate>
-      
+      <author>tsingv@outlook.com (Tsingv)</author>
       <guid>/post/hugo&#43;caddy/</guid>
       <description>&lt;p&gt;#环境配置&lt;/p&gt;
 &lt;blockquote&gt;
@@ -126,7 +128,7 @@ Caddy : &lt;a href=&#34;https://caddyserver.com/download&#34;&gt;官网下载,�
       <title>About</title>
       <link>/about/</link>
       <pubDate>Thu, 05 Sep 2019 19:21:15 +0800</pubDate>
-      
+      <author>tsingv@outlook.com (Tsingv)</author>
       <guid>/about/</guid>
       <description>I &amp;lsquo;am Brugu.</description>
     </item>
