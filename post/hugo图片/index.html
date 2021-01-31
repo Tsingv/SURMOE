@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en-us"><meta charset="utf-8" />
+
+  <title>Hugo 图片插入问题 - No Wander</title>
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="https://sur.moe/css/latex.css" />
+<link rel="stylesheet" href="https://sur.moe/css/main.css" />
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="generator" content="Hugo 0.80.0" /><body>
+
+
+
+
+
+
+<header>
+  <nav class="navbar">
+  <div class="nav">
+    
+
+    <ul class="nav-links">
+      
+    </ul>
+  </div>
+</nav>
+  <div class="intro-header">
+    <div class="container">
+      <div class="post-heading">
+        
+          <h1>Hugo 图片插入问题</h1>
+          
+        
+      </div>
+    </div>
+  </div>
+</header>
+<div id="content">
+  <div class="container" role="main">
+    <article class="article" class="blog-post">
+      <div class="postmeta">
+        <span class="meta-post">
+  <i class="fa fa-calendar-alt"></i>Jan 31, 2021
+  
+</span>
+      </div>
+      <br>
+      
+    <h1 id="如题">如题</h1>
+<p>Hugo图片插入，看到的其他人的做法大多是将其放在一个目录下，比如说static.</p>
+<p>但是我的vim插件使用的相对路径，图片都保存到当前目录下的pic文件夹中。在生成网页后，也全部采用的相对路径，导致图片路径未找到。</p>
+<p>好在，hugo应该是提供了解决方案的，之前还在困惑说为什么一个md文件，hugo会生成这个名字的目录，然后再是index.html。在这里同样利用一下。</p>
+<p>方法就是，不直接生成md文件作为某一篇post，而是新建文件夹，然后在其中创建文件夹，文件夹中存放index.md才是post的内容，多了一层。这样的好处就是，在这个post目录下，图片的pic文件夹就和md文件同级，可以引用，同时，hugo也会生成相应的目录，完美解决了图片的问题。o</p>
+<p><img src="pic/xp.png" alt="xp"></p>
+<h1 id="致谢">致谢</h1>
+<blockquote>
+<p><a href="https://www.isyin.cn/post/2018-05-03-hugo-%E7%9A%84%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E6%96%B9%E6%A1%88/">Hugo 的文件管理方案</a></p>
+</blockquote>
+
+
+
+      
+    </article>
+    
+      
+          <br>
+          <hr>
+          <div class="post-comment">
+          
+          
+<div class="post bg-white">
+    <script src="https://utteranc.es/client.js"
+          repo="Tsingv/tsingv.github.io"
+          issue-term="title"
+          theme="github-light"
+          crossorigin="anonymous"
+          async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+</div>
+          </div>
+      
+  </div>
+
+        </div><footer>
+  <div class="container">
+    <p class="credits copyright">
+      <p class="credits theme-by">
+        Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;/&nbsp;Theme&nbsp;<a href="https://github.com/Tsingv/HugoTeX">HugoTeX</a>
+        <br>
+        <a href="https://sur.moe/about">Tsingv</a>
+        &copy;
+        2021
+      </p>
+  </div>
+</footer></body>
+</html>
