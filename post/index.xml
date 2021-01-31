@@ -8,7 +8,16 @@
     <language>en-us</language>
     <managingEditor>tsingv@outlook.com (Tsingv)</managingEditor>
     <webMaster>tsingv@outlook.com (Tsingv)</webMaster>
-    <lastBuildDate>Sun, 31 Jan 2021 11:19:42 +0800</lastBuildDate><atom:link href="https://sur.moe/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 31 Jan 2021 13:29:42 +0800</lastBuildDate><atom:link href="https://sur.moe/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hugo 图片插入问题</title>
+      <link>https://sur.moe/post/hugo%E5%9B%BE%E7%89%87/</link>
+      <pubDate>Sun, 31 Jan 2021 13:29:42 +0800</pubDate>
+      <author>tsingv@outlook.com (Tsingv)</author>
+      <guid>https://sur.moe/post/hugo%E5%9B%BE%E7%89%87/</guid>
+      <description>如题 Hugo图片插入，看到的其他人的做法大多是将其放在一个目录下，比如说static. 但是我的vim插件使用的相对路径，图片都保存到当前目录</description>
+    </item>
+    
     <item>
       <title>Xposed</title>
       <link>https://sur.moe/post/xposed/</link>
@@ -16,15 +25,6 @@
       <author>tsingv@outlook.com (Tsingv)</author>
       <guid>https://sur.moe/post/xposed/</guid>
       <description>起因 近期要对Xposed模块进行开发，然后需要了解下一些函数的用法 Tips 可以使用阿里maven源加速 在File -&amp;gt; Settings -&amp;gt; Build, Execution, Deployment -&amp;gt; Debugger -&amp;gt; HotSwap 中取消Enab</description>
-    </item>
-    
-    <item>
-      <title>Hugo 图片插入问题</title>
-      <link>https://sur.moe/post/hugo%E5%9B%BE%E7%89%87/</link>
-      <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate>
-      <author>tsingv@outlook.com (Tsingv)</author>
-      <guid>https://sur.moe/post/hugo%E5%9B%BE%E7%89%87/</guid>
-      <description>如题 Hugo图片插入，看到的其他人的做法大多是将其放在一个目录下，比如说static. 但是我的vim插件使用的相对路径，图片都保存到当前目录</description>
     </item>
     
     <item>
