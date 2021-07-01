@@ -8,7 +8,16 @@
     <language>en-us</language>
     <managingEditor>tsingv@outlook.com (Tsingv)</managingEditor>
     <webMaster>tsingv@outlook.com (Tsingv)</webMaster>
-    <lastBuildDate>Sun, 31 Jan 2021 13:29:42 +0800</lastBuildDate><atom:link href="https://sur.moe/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 01 Jul 2021 18:02:20 +0800</lastBuildDate><atom:link href="https://sur.moe/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GnuPG尝鲜</title>
+      <link>https://sur.moe/post/gnupg%E5%B0%9D%E9%B2%9C/</link>
+      <pubDate>Thu, 01 Jul 2021 18:02:20 +0800</pubDate>
+      <author>tsingv@outlook.com (Tsingv)</author>
+      <guid>https://sur.moe/post/gnupg%E5%B0%9D%E9%B2%9C/</guid>
+      <description>gpg好呀，一键加解密签名。 gpg --full-gen-key 上述可以创建一个密钥对。 使用send-key上传到keyserver让别人能用你的公钥。 gpg --send-key YOURKEYID 上述不用担心，</description>
+    </item>
+    
     <item>
       <title>Hugo 图片插入问题</title>
       <link>https://sur.moe/post/hugo%E5%9B%BE%E7%89%87/</link>
