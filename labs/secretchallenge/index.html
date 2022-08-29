@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en-us"><meta charset="utf-8" />
+
+  <title>Secretchallenge - No Wander</title>
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="https://sur.moe/css/latex.css" />
+<link rel="stylesheet" href="https://sur.moe/css/main.css" />
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="generator" content="Hugo 0.92.2" /><body>
+
+
+
+
+
+
+<header>
+  <nav class="navbar">
+  <div class="nav">
+    
+
+    <ul class="nav-links">
+      
+    </ul>
+  </div>
+</nav>
+  <div class="intro-header">
+    <div class="container">
+      <div class="labs-heading">
+        
+          <h1>Secretchallenge</h1>
+          
+        
+      </div>
+    </div>
+  </div>
+</header>
+<div id="content">
+  <div class="container" role="main">
+    <article class="article" class="blog-post">
+      <div class="postmeta">
+        <span class="meta-post">
+  <i class="fa fa-calendar-alt"></i>Oct 25, 2021
+  
+</span>
+      </div>
+      <br>
+      
+    <h1 id="secretchallenge">SecretChallenge</h1>
+<h2 id="step1task1">Step1.Task1</h2>
+<ul>
+<li>自启动Receiver需要在Manifest中定义，设置接收<code>BOOT_COMPLETE</code>的权限以及
+设置<code>intent-filter</code></li>
+</ul>
+<pre tabindex="0"><code>&lt;intent-filter&gt;
+    &lt;action android:name=&quot;android.intent.action.BOOT_COMPLETED&quot;/&gt;
+&lt;!--    &lt;action android:name=&quot;android.intent.action.MAIN&quot;/&gt;--&gt;
+&lt;/intent-filter&gt;
+</code></pre><ul>
+<li>Android10 后需要设置前台服务类型，以及向用户请求获得权限</li>
+</ul>
+<pre tabindex="0"><code>&lt;service
+    ...
+    android:foregroundServiceType=&quot;location&quot; &gt;
+    ...
+&lt;/service&gt;
+
+---
+
+if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+    ActivityCompat.requestPermissions(this, pers, 1);
+}
+</code></pre><ul>
+<li>位置方面遇到的问题是似乎没能够更新位置信息</li>
+</ul>
+<h2 id="step1task2">Step1.Task2</h2>
+<ul>
+<li>似乎并不需要在子线程中更新UI，但是在Task1中也有代码完成类似功能</li>
+</ul>
+<h2 id="step1task3">Step1.Task3</h2>
+<ul>
+<li>将<code>Step1_Task3_classes.jar</code>复制到<code>libs/classes.jar</code>并在gradle.build中导入</li>
+</ul>
+<p>反射时需要使用<code>getDeclaredMethod</code>，<code>getMethod</code>会提示没有此方法。
+另对method和field都需要设置Accessible为<code>true</code>否则会报错。</p>
+<p>看起来我们需要知道要调用的类有的东西才可以。</p>
+<h2 id="step2task1">Step2.Task1</h2>
+<ul>
+<li>这里使用smali命令进行编译</li>
+</ul>
+<pre tabindex="0"><code>smali assemble -o dexName.dex ../../Resources/smali/
+</code></pre><ul>
+<li></li>
+</ul>
+
+
+
+      
+    </article>
+    
+      
+          <br>
+          <hr>
+          <div class="post-comment">
+          
+          
+<div class="post bg-white">
+    <script src="https://utteranc.es/client.js"
+          repo="Tsingv/tsingv.github.io"
+          issue-term="title"
+          theme="github-light"
+          crossorigin="anonymous"
+          async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+</div>
+          </div>
+      
+  </div>
+
+        </div><footer>
+  <div class="container">
+    <p class="credits copyright">
+      <p class="credits theme-by">
+        Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;/&nbsp;Theme&nbsp;<a href="https://github.com/Tsingv/HugoTeX">HugoTeX</a>
+        <br>
+        <a href="https://sur.moe/about">Tsingv</a>
+        &copy;
+        2022
+      </p>
+  </div>
+</footer></body>
+</html>

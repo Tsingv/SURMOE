@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Labs on No Wander</title>
+    <link>https://sur.moe/labs/</link>
+    <description>Recent content in Labs on No Wander</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>tsingv@outlook.com (Tsingv)</managingEditor>
+    <webMaster>tsingv@outlook.com (Tsingv)</webMaster>
+    <lastBuildDate>Mon, 25 Oct 2021 18:36:37 +0800</lastBuildDate><atom:link href="https://sur.moe/labs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Secretchallenge</title>
+      <link>https://sur.moe/labs/secretchallenge/</link>
+      <pubDate>Mon, 25 Oct 2021 18:36:37 +0800</pubDate>
+      <author>tsingv@outlook.com (Tsingv)</author>
+      <guid>https://sur.moe/labs/secretchallenge/</guid>
+      <description>SecretChallenge Step1.Task1 自启动Receiver需要在Manifest中定义，设置接收BOOT_COMPLETE的权限以及 设置intent-filter &amp;lt;intent-filter&amp;gt; &amp;lt;action android:name=&amp;quot;android.intent.action.BOOT_COMPLETED&amp;quot;/&amp;gt; &amp;lt;!-- &amp;lt;action</description>
+    </item>
+    
+  </channel>
+</rss>
