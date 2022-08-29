@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="https://sur.moe/css/latex.css" />
 <link rel="stylesheet" href="https://sur.moe/css/main.css" />
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<meta name="generator" content="Hugo 0.92.2" /><body>
+<meta name="generator" content="Hugo 0.101.0" /><body>
 
 
 
@@ -55,15 +55,15 @@
 设置<code>intent-filter</code></li>
 </ul>
 <pre tabindex="0"><code>&lt;intent-filter&gt;
-    &lt;action android:name=&quot;android.intent.action.BOOT_COMPLETED&quot;/&gt;
-&lt;!--    &lt;action android:name=&quot;android.intent.action.MAIN&quot;/&gt;--&gt;
+    &lt;action android:name=&#34;android.intent.action.BOOT_COMPLETED&#34;/&gt;
+&lt;!--    &lt;action android:name=&#34;android.intent.action.MAIN&#34;/&gt;--&gt;
 &lt;/intent-filter&gt;
 </code></pre><ul>
 <li>Android10 后需要设置前台服务类型，以及向用户请求获得权限</li>
 </ul>
 <pre tabindex="0"><code>&lt;service
     ...
-    android:foregroundServiceType=&quot;location&quot; &gt;
+    android:foregroundServiceType=&#34;location&#34; &gt;
     ...
 &lt;/service&gt;
 

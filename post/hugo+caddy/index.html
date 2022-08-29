@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="https://sur.moe/css/latex.css" />
 <link rel="stylesheet" href="https://sur.moe/css/main.css" />
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<meta name="generator" content="Hugo 0.92.2" /><body>
+<meta name="generator" content="Hugo 0.101.0" /><body>
 
 
 
@@ -68,7 +68,7 @@ hugo server
 或
 hugo --destination=newsite/public --theme=base16        //静态生成
 </code></pre><p>这时网站已经有了第一篇博客，就是 first.md 经过渲染得到的。渲染后的静态网页会放在 public 文件夹，但是注意到如果使用hugo的调试模式，并不会保存渲染后的静态网页。<br>
-我们可以在后面加上 &ndash;baseURL='' 指定 baseURL，也可以在 config.toml 中修改。理论上是修改为你的域名但是我确实设置为'/&lsquo;后正常的，同时在config.toml中添加 &ldquo;relativeurls = true&rdquo; 使用相对路径规避一些问题。<br>
+我们可以在后面加上 &ndash;baseURL=&rsquo;&rsquo; 指定 baseURL，也可以在 config.toml 中修改。理论上是修改为你的域名但是我确实设置为&rsquo;/&lsquo;后正常的，同时在config.toml中添加 &ldquo;relativeurls = true&rdquo; 使用相对路径规避一些问题。<br>
 在指定了主题后，我们再次打开调试模式就能看到内容了。至此本地的任务完成了。</p>
 <p>考虑在根目录使用git同步，假设你已经同步到了你的remote git server 然后也有了token，这里我使用的github，上传的时候使用ssh方式push，同样的，pull也是ssh方式，这样可以使用私有库。</p>
 <h2 id="服务器端">服务器端</h2>

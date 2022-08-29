@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="https://sur.moe/css/latex.css" />
 <link rel="stylesheet" href="https://sur.moe/css/main.css" />
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<meta name="generator" content="Hugo 0.92.2" /><body>
+<meta name="generator" content="Hugo 0.101.0" /><body>
 
 
 
@@ -49,78 +49,78 @@
       <br>
       
     <h1 id="awk-useage">awk Useage</h1>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">1.命令行方式
-awk <span style="color:#f92672">[</span>-F  field-separator<span style="color:#f92672">]</span>  <span style="color:#e6db74">&#39;commands&#39;</span>  input-file<span style="color:#f92672">(</span>s<span style="color:#f92672">)</span>
-其中，commands 是真正awk命令，<span style="color:#f92672">[</span>-F域分隔符<span style="color:#f92672">]</span>是可选的。 input-file<span style="color:#f92672">(</span>s<span style="color:#f92672">)</span> 是待处理的文件。
-在awk中，文件的每一行中，由域分隔符分开的每一项称为一个域。通常，在不指名-F域分隔符的情况下，默认的域分隔符是空格。
-
-2.shell脚本方式
-将所有的awk命令插入一个文件，并使awk程序可执行，然后awk命令解释器作为脚本的首行，一遍通过键入脚本名称来调用。
-相当于shell脚本首行的：#!/bin/sh
-可以换成：#!/bin/awk
-
-3.将所有的awk命令插入一个单独文件，然后调用：
-awk -f awk-script-file input-file<span style="color:#f92672">(</span>s<span style="color:#f92672">)</span>
-其中，-f选项加载awk-script-file中的awk脚本，input-file<span style="color:#f92672">(</span>s<span style="color:#f92672">)</span>跟上面的是一样的。
-</code></pre></div><p>pattern 使用示例</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># awk -F: &#39;/root&#39; /etc/passwd</span>
-root❌0:0:root:/root:/bin/bash
-//仅在pattern匹配的行执行action
-</code></pre></div><h2 id="awk-内置变量">awk 内置变量</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ARGC               命令行参数个数
-ARGV               命令行参数排列
-ENVIRON            支持队列中系统环境变量的使用
-FILENAME           awk浏览的文件名
-FNR                浏览文件的记录数
-FS                 设置输入域分隔符，等价于命令行 -F选项
-NF                 浏览记录的域的个数
-NR                 已读的记录数
-OFS                输出域分隔符
-ORS                输出记录分隔符
-RS                 控制记录分隔符
-</code></pre></div><p>使用printf代替print</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> awk  -F <span style="color:#e6db74">&#39;:&#39;</span>  <span style="color:#e6db74">&#39;{printf(&#34;filename:%10s,linenumber:%s,columns:%s,linecontent:%s\n&#34;,FILENAME,NR,NF,$0)}&#39;</span> /etc/passwd
-</code></pre></div><p>自定义变量</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">awk <span style="color:#e6db74">&#39;BEGIN {count=0;print &#34;[start]user count is &#34;, count} {count=count+1;print $0;} END{print &#34;[end]user count is &#34;, count}&#39;</span> /etc/passwd
-<span style="color:#f92672">[</span>start<span style="color:#f92672">]</span>user count is  <span style="color:#ae81ff">0</span>
-root❌0:0:root:/root:/bin/bash
-...
-<span style="color:#f92672">[</span>end<span style="color:#f92672">]</span>user count is  <span style="color:#ae81ff">40</span>
-//默认变量值是0,可以初始化，不需声明
-</code></pre></div><p>awk条件语句</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>expression<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-    statement;
-    statement;
-    ... ...
-<span style="color:#f92672">}</span>
-
-<span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>expression<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-    statement;
-<span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
-    statement2;
-<span style="color:#f92672">}</span>
-
-<span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>expression<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-    statement1;
-<span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>expression1<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-    statement2;
-<span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
-    statement3;
-<span style="color:#f92672">}</span>
-
-//while , <span style="color:#66d9ef">do</span> <span style="color:#66d9ef">while</span> , <span style="color:#66d9ef">for</span> break , continue都适用，同C
-</code></pre></div><p>数组</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>1.命令行方式
+</span></span><span style="display:flex;"><span>awk <span style="color:#f92672">[</span>-F  field-separator<span style="color:#f92672">]</span>  <span style="color:#e6db74">&#39;commands&#39;</span>  input-file<span style="color:#f92672">(</span>s<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>其中，commands 是真正awk命令，<span style="color:#f92672">[</span>-F域分隔符<span style="color:#f92672">]</span>是可选的。 input-file<span style="color:#f92672">(</span>s<span style="color:#f92672">)</span> 是待处理的文件。
+</span></span><span style="display:flex;"><span>在awk中，文件的每一行中，由域分隔符分开的每一项称为一个域。通常，在不指名-F域分隔符的情况下，默认的域分隔符是空格。
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>2.shell脚本方式
+</span></span><span style="display:flex;"><span>将所有的awk命令插入一个文件，并使awk程序可执行，然后awk命令解释器作为脚本的首行，一遍通过键入脚本名称来调用。
+</span></span><span style="display:flex;"><span>相当于shell脚本首行的：#!/bin/sh
+</span></span><span style="display:flex;"><span>可以换成：#!/bin/awk
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>3.将所有的awk命令插入一个单独文件，然后调用：
+</span></span><span style="display:flex;"><span>awk -f awk-script-file input-file<span style="color:#f92672">(</span>s<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>其中，-f选项加载awk-script-file中的awk脚本，input-file<span style="color:#f92672">(</span>s<span style="color:#f92672">)</span>跟上面的是一样的。
+</span></span></code></pre></div><p>pattern 使用示例</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># awk -F: &#39;/root&#39; /etc/passwd</span>
+</span></span><span style="display:flex;"><span>root❌0:0:root:/root:/bin/bash
+</span></span><span style="display:flex;"><span>//仅在pattern匹配的行执行action
+</span></span></code></pre></div><h2 id="awk-内置变量">awk 内置变量</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ARGC               命令行参数个数
+</span></span><span style="display:flex;"><span>ARGV               命令行参数排列
+</span></span><span style="display:flex;"><span>ENVIRON            支持队列中系统环境变量的使用
+</span></span><span style="display:flex;"><span>FILENAME           awk浏览的文件名
+</span></span><span style="display:flex;"><span>FNR                浏览文件的记录数
+</span></span><span style="display:flex;"><span>FS                 设置输入域分隔符，等价于命令行 -F选项
+</span></span><span style="display:flex;"><span>NF                 浏览记录的域的个数
+</span></span><span style="display:flex;"><span>NR                 已读的记录数
+</span></span><span style="display:flex;"><span>OFS                输出域分隔符
+</span></span><span style="display:flex;"><span>ORS                输出记录分隔符
+</span></span><span style="display:flex;"><span>RS                 控制记录分隔符
+</span></span></code></pre></div><p>使用printf代替print</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span> awk  -F <span style="color:#e6db74">&#39;:&#39;</span>  <span style="color:#e6db74">&#39;{printf(&#34;filename:%10s,linenumber:%s,columns:%s,linecontent:%s\n&#34;,FILENAME,NR,NF,$0)}&#39;</span> /etc/passwd
+</span></span></code></pre></div><p>自定义变量</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>awk <span style="color:#e6db74">&#39;BEGIN {count=0;print &#34;[start]user count is &#34;, count} {count=count+1;print $0;} END{print &#34;[end]user count is &#34;, count}&#39;</span> /etc/passwd
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>start<span style="color:#f92672">]</span>user count is  <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>root❌0:0:root:/root:/bin/bash
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>end<span style="color:#f92672">]</span>user count is  <span style="color:#ae81ff">40</span>
+</span></span><span style="display:flex;"><span>//默认变量值是0,可以初始化，不需声明
+</span></span></code></pre></div><p>awk条件语句</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>expression<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    statement;
+</span></span><span style="display:flex;"><span>    statement;
+</span></span><span style="display:flex;"><span>    ... ...
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>expression<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    statement;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    statement2;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>expression<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    statement1;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>expression1<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    statement2;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    statement3;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>//while , <span style="color:#66d9ef">do</span> <span style="color:#66d9ef">while</span> , <span style="color:#66d9ef">for</span> break , continue都适用，同C
+</span></span></code></pre></div><p>数组</p>
 <ul>
 <li>自动判断数字还是字符串</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">awk -F <span style="color:#e6db74">&#39;:&#39;</span> <span style="color:#e6db74">&#39;BEGIN {count=0;} {name[count] = $1;count++;}; END{for (i = 0; i &lt; NR; i++) print i, name[i]}&#39;</span> /etc/passwd
-<span style="color:#ae81ff">0</span> root
-<span style="color:#ae81ff">1</span> daemon
-<span style="color:#ae81ff">2</span> bin
-<span style="color:#ae81ff">3</span> sys
-<span style="color:#ae81ff">4</span> sync
-<span style="color:#ae81ff">5</span> games
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>awk -F <span style="color:#e6db74">&#39;:&#39;</span> <span style="color:#e6db74">&#39;BEGIN {count=0;} {name[count] = $1;count++;}; END{for (i = 0; i &lt; NR; i++) print i, name[i]}&#39;</span> /etc/passwd
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span> root
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span> daemon
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span> bin
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span> sys
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span> sync
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span> games
+</span></span></code></pre></div>
 
 
       
