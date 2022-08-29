@@ -8,7 +8,16 @@
     <language>en-us</language>
     <managingEditor>tsingv@outlook.com (Tsingv)</managingEditor>
     <webMaster>tsingv@outlook.com (Tsingv)</webMaster>
-    <lastBuildDate>Tue, 05 Oct 2021 23:57:25 +0800</lastBuildDate><atom:link href="https://sur.moe/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 06 Oct 2021 01:23:21 +0800</lastBuildDate><atom:link href="https://sur.moe/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ChromiumSync</title>
+      <link>https://sur.moe/post/chromiumsync/</link>
+      <pubDate>Wed, 06 Oct 2021 01:23:21 +0800</pubDate>
+      <author>tsingv@outlook.com (Tsingv)</author>
+      <guid>https://sur.moe/post/chromiumsync/</guid>
+      <description>解决了之前Chromium同步Google账户的问题，经过对比，发现关键的一步在 测试用户界面添加自己的账户，否则会一直登陆，但是没有什么效果</description>
+    </item>
+    
     <item>
       <title>WaylandTest2</title>
       <link>https://sur.moe/post/waylandtest2/</link>
