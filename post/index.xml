@@ -8,7 +8,16 @@
     <language>en-us</language>
     <managingEditor>tsingv@outlook.com (Tsingv)</managingEditor>
     <webMaster>tsingv@outlook.com (Tsingv)</webMaster>
-    <lastBuildDate>Thu, 01 Jul 2021 18:02:20 +0800</lastBuildDate><atom:link href="https://sur.moe/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 05 Oct 2021 23:57:25 +0800</lastBuildDate><atom:link href="https://sur.moe/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>WaylandTest2</title>
+      <link>https://sur.moe/post/waylandtest2/</link>
+      <pubDate>Tue, 05 Oct 2021 23:57:25 +0800</pubDate>
+      <author>tsingv@outlook.com (Tsingv)</author>
+      <guid>https://sur.moe/post/waylandtest2/</guid>
+      <description>Wayland在许多的方面已经很好用了，虽然我只用过weston和sway（不带xwayland哈）。 weston没有快捷键实在是太难过了，</description>
+    </item>
+    
     <item>
       <title>GnuPG尝鲜</title>
       <link>https://sur.moe/post/gnupg%E5%B0%9D%E9%B2%9C/</link>

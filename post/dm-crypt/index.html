@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="https://sur.moe/css/latex.css" />
 <link rel="stylesheet" href="https://sur.moe/css/main.css" />
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<meta name="generator" content="Hugo 0.84.3" /><body>
+<meta name="generator" content="Hugo 0.88.1" /><body>
 
 
 
@@ -52,11 +52,11 @@
 <p>在编程随想上看到了linux下的全盘加密，我觉得我是有这样的需求的，因此参阅一些资料完成了全盘的加密。</p>
 <h2 id="操作">操作</h2>
 <p>首先对磁盘进行备份，这里使用的dd直接进行全盘加密没有压缩</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># dd if=/dev/sda1 of=/mnt/backup.raw status=progress</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># dd if=/dev/sda1 of=/mnt/backup.raw status=progress</span>
 //status是新版本支持的，可以显示dd的进度
 //备份到其他地方哈
 </code></pre></div><p>随后对现有的分区进行加密和格式化</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># cryptsetup --cipher aes-xts-plain64 --key-size 512 --hash sha512 --iter-time 10000 luksFormat /dev/sda1</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># cryptsetup --cipher aes-xts-plain64 --key-size 512 --hash sha512 --iter-time 10000 luksFormat /dev/sda1</span>
 //初始化磁盘加密，这会销毁所有的现有数据
 //这里默认是新的LUKS2加密头，GRUB尚未完成对其的加密引导支持，具体可参阅Arch的GRUB wiki，这样的化我们需要单独的/boot分区，未加密的。
 <span style="color:#75715e"># cryptsetup luksOpen /dev/sda1 xxx</span>
@@ -68,7 +68,7 @@
 <span style="color:#75715e"># resize2fs /dev/mapper/xxx //运气好不用这样只需要fsck -b指定备用的superblock位置就好</span>
 </code></pre></div><p>到这里系统就已经就绪了，BTW，以上这些都是在外面的live操作系统操作的</p>
 <p>将单独的boot分区挂载到系统的/boot下，随后进行grub安装</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># genfstab -U /xxx</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># genfstab -U /xxx</span>
 //生成fstab文件更新
 <span style="color:#75715e"># arch-chroot /xxx </span>
 //这里把/dev/mapper/xxx 挂载到了/xxx下
@@ -77,13 +77,13 @@
 //我这里安装了之后并没有把内核弄进去我不知道是不是EFI分区非空的原因
 //之前内核加载进去我是把之前的内核复制过去的:-P
 </code></pre></div><p>修改/etc/mkinitcpio.conf</p>
-<pre><code class="language-configure" data-lang="configure">MODULES=(vfat ext4)
+<pre tabindex="0"><code class="language-configure" data-lang="configure">MODULES=(vfat ext4)
 HOOKS=(base udev autodetect keyboard keymap modconf block encrypt filesystems fsck)
 </code></pre><p>修改/etc/default/grub</p>
-<pre><code class="language-configure" data-lang="configure">GRUB_CMDLINE_LINUX_DEFAULT=&quot;root=/dev/mapper/xxx&quot;
+<pre tabindex="0"><code class="language-configure" data-lang="configure">GRUB_CMDLINE_LINUX_DEFAULT=&quot;root=/dev/mapper/xxx&quot;
 GRUB_CMDLINE_LINUX=&quot;cryptdevice=/dev/sda1:xxx&quot;
 </code></pre><p>重新生成内核和配置文件</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># mkinitcpio -p linux</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># mkinitcpio -p linux</span>
 <span style="color:#75715e"># grub-mkconfig -o /boot/grub/grub.cfg</span>
 </code></pre></div><p>随后重启，如果找不到可以使用efibootmgr调整这些，，最后就可以啦</p>
 <h2 id="参考">参考</h2>

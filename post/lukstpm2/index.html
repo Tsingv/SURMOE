@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="https://sur.moe/css/latex.css" />
 <link rel="stylesheet" href="https://sur.moe/css/main.css" />
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<meta name="generator" content="Hugo 0.84.3" /><body>
+<meta name="generator" content="Hugo 0.88.1" /><body>
 
 
 
@@ -54,9 +54,9 @@
 <h2 id="准备">准备</h2>
 <p>在之前的文章中应当是实现了LUKS的全盘加密，顺着走。</p>
 <p>首先需要基本管理tpm的软件，在Arch中，安装即可</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ yay -Syu tpm2-abrmd tpm2-tools tpm2-tss
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ yay -Syu tpm2-abrmd tpm2-tools tpm2-tss
 </code></pre></div><p>测试TPM是否工作良好，读取存储在TPM中的PCR值</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ tpm2_pcrread
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ tpm2_pcrread
 sha1:
   <span style="color:#ae81ff">0</span> : 0xA32203D76D2FD203DD76D2FD203D76D21D2C99A8
   <span style="color:#ae81ff">1</span> : 0x55CB0B4841FECB0B44841FECB0B4841F9CB64433
@@ -113,7 +113,7 @@ sha256:
 <h2 id="写入tpm">写入TPM</h2>
 <p>将密钥写入到TPM2芯片，假设你解密密钥存储的位置是/usr/_crypto_keyfile</p>
 <p>一个小问题是密钥的长度，太长了不得行，这个<a href="https://github.com/tpm2-software/tpm2-tools/issues/2083">issue</a>指出，长度应该是128淦。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 清除TPM芯片</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 清除TPM芯片</span>
 tpm2_evictcontrol -C o -c 0x81000000
 <span style="color:#75715e"># 写入密钥</span>
 <span style="color:#75715e"># 这里只用了PCR0和7，PCR4听说是系统生成的，每次内核的更改都需要重新写入一遍密钥</span>
@@ -124,11 +124,11 @@ tpm2_load -C primary.context -u obj.pub -r obj.priv -c load.context
 tpm2_evictcontrol -C o -c load.context 0x81000000
 rm load.context obj.priv obj.pub policy.digest primary.context
 </code></pre></div><p>完成过后，你可以使用如下命令将TPM中的密钥取出，和原来的密钥进行比较</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">tpm2_unseal -c 0x81000000 -p pcr:sha1:0,7 -o /crypto_keyfile.bin
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">tpm2_unseal -c 0x81000000 -p pcr:sha1:0,7 -o /crypto_keyfile.bin
 <span style="color:#75715e"># 记住这个输出路径</span>
 </code></pre></div><h2 id="更改内核">更改内核</h2>
 <p>首先呢参照<a href="https://github.com/pawitp/arch-luks-tpm">大佬</a>的脚本再更改一下下，原因为不知道大佬的mkinitcpio.conf是怎么写的，这里摸索了下。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># /etc/initcpio/hooks/encrypt-tpm</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># /etc/initcpio/hooks/encrypt-tpm</span>
 <span style="color:#75715e">#!/usr/bin/bash</span>
 
 run_hook<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
@@ -140,7 +140,7 @@ run_hook<span style="color:#f92672">()</span> <span style="color:#f92672">{</spa
     tpm2_unseal -c 0x81000000 -p pcr:sha1:0,7 -o /crypto_keyfile.bin
 <span style="color:#f92672">}</span>
 
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># /etc/initcpio/install/encrypt-tpm</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># /etc/initcpio/install/encrypt-tpm</span>
 <span style="color:#75715e">#!/bin/bash</span>
 
 build<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
@@ -166,13 +166,13 @@ help<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
 
 </code></pre></div><p>重点来了，上述两个script添加了HOOK动作，在生成内核的时候会被写入进去。下述是节选的关键配置，MODULES中已知的一定要有tpm_tis这个模块，否则在BOOT阶段内核中是没有TPM驱动的，偶把他们都加上了。</p>
 <p>另外，BINARIES是上述script中需要使用的，FILES是后面解密LUKS驱动器所需要的 <strong>密钥的文件路径</strong>，这里的这个路径是默认的密钥的位置，当然也是可以指定的，但是这个根下面的东西在解密后就看不见了，因为解密后的会挂载到根目录，详见<a href="https://wiki.archlinux.org/index.php/dm-crypt/Device_encryption#With_a_keyfile_embedded_in_the_initramfs">Wiki</a></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># /etc/mkinitcpio.conf</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># /etc/mkinitcpio.conf</span>
 MODULES<span style="color:#f92672">=(</span>vfat ext4 tpm tpm_crb tpm_tis tpm_tis_core trusted<span style="color:#f92672">)</span>
 BINARIES<span style="color:#f92672">=(</span>tpm2_unseal /usr/lib/libtss2-tcti-device.so<span style="color:#f92672">)</span>
 FILES<span style="color:#f92672">=(</span>/crypto_keyfile.bin<span style="color:#f92672">)</span>
 HOOKS<span style="color:#f92672">=(</span>base udev autodetect modconf block filesystems keyboard fsck keymap encrypt-tpm encrypt <span style="color:#f92672">)</span>
 </code></pre></div><p>随后重新生成内核，更新grub</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
 </span><span style="color:#75715e"></span>mkinitcpio -P
 
 <span style="color:#75715e"># 根据自己的路径哈</span>

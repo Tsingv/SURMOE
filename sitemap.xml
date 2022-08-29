@@ -2,13 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://sur.moe/post/gnupg%E5%B0%9D%E9%B2%9C/</loc>
-    <lastmod>2021-07-01T18:02:20+08:00</lastmod>
-  </url><url>
     <loc>https://sur.moe/</loc>
-    <lastmod>2021-07-01T18:02:20+08:00</lastmod>
+    <lastmod>2021-10-05T23:57:25+08:00</lastmod>
   </url><url>
     <loc>https://sur.moe/post/</loc>
+    <lastmod>2021-10-05T23:57:25+08:00</lastmod>
+  </url><url>
+    <loc>https://sur.moe/post/waylandtest2/</loc>
+    <lastmod>2021-10-05T23:57:25+08:00</lastmod>
+  </url><url>
+    <loc>https://sur.moe/post/gnupg%E5%B0%9D%E9%B2%9C/</loc>
     <lastmod>2021-07-01T18:02:20+08:00</lastmod>
   </url><url>
     <loc>https://sur.moe/post/hugo%E5%9B%BE%E7%89%87/</loc>

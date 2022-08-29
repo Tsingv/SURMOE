@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-us"><meta charset="utf-8" />
 
-  <title>WaylandTest - No Wander</title>
+  <title>WaylandTest2 - No Wander</title>
 
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -30,7 +30,7 @@
     <div class="container">
       <div class="post-heading">
         
-          <h1>WaylandTest</h1>
+          <h1>WaylandTest2</h1>
           
         
       </div>
@@ -42,18 +42,28 @@
     <article class="article" class="blog-post">
       <div class="postmeta">
         <span class="meta-post">
-  <i class="fa fa-calendar-alt"></i>Dec 16, 2019
+  <i class="fa fa-calendar-alt"></i>Oct 5, 2021
   
 </span>
       </div>
       <br>
       
-    <h1 id="wayland-first-test">Wayland First? Test</h1>
-<p>不知道怎么说，Wayland是个新东西而且理论上确实比X更加的高效，但是不幸的是其还是太新的，很多应用并没有适配wayland协议，导致了上面的应用还是比较少。</p>
-<p>GTK3和QT5说都已经支持wayland了，事实上也是这样的情况，大多最新的应用都可以支持包括firefox,libreoffice,lxterminal这些应用，chromium在上面运行不了原因是有GTK2的东西？rdp这些软件也是没有办法的，但是正因为如此我才发现了VirtualBox虚拟机不需要图形化界面就可以运行，&ndash;type headless,这样可以节省开销因为ssh就可以连过去了。</p>
-<p>期间使用了sway还是挺好用的，解决了weston下没有快捷键的烦恼，但是大多数应用还是使用的Xwayland,把它干掉后用的应用就挺难受的，重要的是输入法没有候选框。</p>
-<p>最后，重新回到了openbox的怀抱，不知道是不是我的错觉，图形化界面竟然是流畅的，可能，Intel显卡驱动还没做wayland吧。</p>
-<p>以上</p>
+    <p>Wayland在许多的方面已经很好用了，虽然我只用过weston和sway（不带xwayland哈）。
+weston没有快捷键实在是太难过了，不然就是完善的浮动窗口桌面管理器了。</p>
+<p>在sway下面大多数应用都可以运行了，但是java的还有一些问题。
+基于electron的chromium和vscode都可以通过命令行参数
+<code>--enable-features=UseOzonePlatform --ozone-platform=wayland</code>
+顺利运行起来，但同时也是它们，<strong>不能够使用fcitx5</strong>输入法。
+这是一个巨大的问题，不然用起来是相当不错的，解决方法有几个。
+一个就是用xwayland启动它们，一个就是利用复制粘贴，为此我写了一个小程序
+<a href="https://github.com/Tsingv/qtwlcopy">qtwlcopy</a>。
+使用快捷键打开然后输入文字回车复制然后粘贴即可。
+理想的程序是利用wlroot直接完成所有操作，但是目前仅仅停留在独立的Qt程序。</p>
+<p>实话说其他的别扭越来越少了，freerdp的wayland版本命令行是wlfreerdp，
+之前我还以为只有xfreerdp也只叫这一个名字呢。</p>
+<p>在wayland下firefox我这依然要卡死，所以才没有使用它，但是X下面更糟糕，
+整个X卡死了。我不明白，晕。</p>
+<p>最后希望更多应用能够支持Wayland，祝好。</p>
 
 
 

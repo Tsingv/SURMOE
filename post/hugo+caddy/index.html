@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="https://sur.moe/css/latex.css" />
 <link rel="stylesheet" href="https://sur.moe/css/main.css" />
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<meta name="generator" content="Hugo 0.84.3" /><body>
+<meta name="generator" content="Hugo 0.88.1" /><body>
 
 
 
@@ -56,7 +56,7 @@ Caddy : <a href="https://caddyserver.com/download">官网下载,需要选择http
 </blockquote>
 <p>#Hugo的配置
 我们假设已经安装无误了，那么我们将开始建立静态网站</p>
-<pre><code>hugo new site newsite
+<pre tabindex="0"><code>hugo new site newsite
 //会生成一个叫 newsite 的文件夹，存放你的站点里面有一些文件夹，但是，是空的
 hugo new post/first.md
 //这时会在content目录下生成 post/first.md 这个文件，编辑它，格式是Markdown，前面draft一行，删去为正式的文章
@@ -64,7 +64,7 @@ hugo server
 //这时hugo已经在本地运行了，浏览器访问 http://localhost:1313 可以看到效果，但是，是白的对吗:-)
 </code></pre><p>我们要想看到内容就要为 hugo 选择一款主题，可以自己写也可以在<a href="https://themes.gohugo.io/">Hugo主题</a>这里选择，然后按照上面的操作保存下来。<br>
 假设我们的主题名称是 base16</p>
-<pre><code>hugo server --theme=base16          //调试使用
+<pre tabindex="0"><code>hugo server --theme=base16          //调试使用
 或
 hugo --destination=newsite/public --theme=base16        //静态生成
 </code></pre><p>这时网站已经有了第一篇博客，就是 first.md 经过渲染得到的。渲染后的静态网页会放在 public 文件夹，但是注意到如果使用hugo的调试模式，并不会保存渲染后的静态网页。<br>
@@ -73,7 +73,7 @@ hugo --destination=newsite/public --theme=base16        //静态生成
 <p>考虑在根目录使用git同步，假设你已经同步到了你的remote git server 然后也有了token，这里我使用的github，上传的时候使用ssh方式push，同样的，pull也是ssh方式，这样可以使用私有库。</p>
 <h2 id="服务器端">服务器端</h2>
 <p>此处po上CaddyFile代码</p>
-<pre><code>  clearain.cn {
+<pre tabindex="0"><code>  clearain.cn {
 	tls email@example.cn
 	root /var/www/Blog/public
 	gzip
