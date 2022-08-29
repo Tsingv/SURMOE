@@ -8,7 +8,16 @@
     <language>en-us</language>
     <managingEditor>tsingv@outlook.com (Tsingv)</managingEditor>
     <webMaster>tsingv@outlook.com (Tsingv)</webMaster>
-    <lastBuildDate>Wed, 06 Oct 2021 01:23:21 +0800</lastBuildDate><atom:link href="https://sur.moe/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 15 Oct 2021 17:09:49 +0800</lastBuildDate><atom:link href="https://sur.moe/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Note1</title>
+      <link>https://sur.moe/research/note1/</link>
+      <pubDate>Fri, 15 Oct 2021 17:09:49 +0800</pubDate>
+      <author>tsingv@outlook.com (Tsingv)</author>
+      <guid>https://sur.moe/research/note1/</guid>
+      <description>TaintDroid 考虑了不止只有值得跟踪，对数组这类有对索引的追踪，这样可以防止程序对污点数据进行变换后，失去追踪的能力。 要对对象引用进行跟踪 native层</description>
+    </item>
+    
     <item>
       <title>ChromiumSync</title>
       <link>https://sur.moe/post/chromiumsync/</link>

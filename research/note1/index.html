@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en-us"><meta charset="utf-8" />
+
+  <title>Note1 - No Wander</title>
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="https://sur.moe/css/latex.css" />
+<link rel="stylesheet" href="https://sur.moe/css/main.css" />
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="generator" content="Hugo 0.88.1" /><body>
+
+
+
+
+
+
+<header>
+  <nav class="navbar">
+  <div class="nav">
+    
+
+    <ul class="nav-links">
+      
+    </ul>
+  </div>
+</nav>
+  <div class="intro-header">
+    <div class="container">
+      <div class="research-heading">
+        
+          <h1>Note1</h1>
+          
+        
+      </div>
+    </div>
+  </div>
+</header>
+<div id="content">
+  <div class="container" role="main">
+    <article class="article" class="blog-post">
+      <div class="postmeta">
+        <span class="meta-post">
+  <i class="fa fa-calendar-alt"></i>Oct 15, 2021
+  
+</span>
+      </div>
+      <br>
+      
+    <h1 id="taintdroid">TaintDroid</h1>
+<p>考虑了不止只有值得跟踪，对数组这类有对索引的追踪，这样可以防止程序对污点数据进行变换后，失去追踪的能力。</p>
+<p>要对对象引用进行跟踪</p>
+<p>native层面的跟踪比较难，于是他们不允许加载第三方native库</p>
+<p>枚举jni数据流很耗时，说可以对源码分析自动化实现</p>
+<p>在ipc跟踪中，所有parcel中数据项都共享一个taint tag，可能造成误报。</p>
+<p>对存储的文件也建立taint tag，以文件系统扩展属性实现</p>
+<p>提供污点接口库，能够为变量或值添加taint tag，但是不会影响使用。</p>
+<p>需要鉴别敏感信息源和设备污染源，定义污点源，考虑很多的敏感信息。</p>
+<p>hook获得低带宽传感器的数据的方法。
+hook获得麦克风相机这类高带宽的数据缓存器及文件
+电话簿之类的信息数据库对数据库文件添加tag，但对更大的数据库不适用
+hook标识用户的方法
+对网络接口进行hook与native
+层的插桩</p>
+<p>只跟踪了数据流，控制流方面没有考虑可能被绕过，同时也会导致没有约束会一直进行跟
+踪，增加系统的开销。</p>
+<p>TaintDroid是一种动态分析工具，定制的系统，能够绕过一些混淆，但也有可能特征比较明
+显被针对。内存方面因为多了TaintTag开销会比较大。另外TaintSource方面，对消息内容
+的定位不是TaintDroid的核心，但确实污点跟踪的核心，还可以继续往后做。</p>
+<h1 id="appintent">AppIntent</h1>
+<p>想法是提供信息传输发生时的上下文，于是输入的包括内容和用户交互的输入事件。</p>
+<p>之前的符号制作并主要分析无交互的程序，因为用户交互可能导致路径爆炸。提出事件空间
+约束指导的符号执行。现有的符号执行不能分析对事件类型的触发，也没有考虑事件之间也
+存在冲突关系。</p>
+<p>首先找能够到敏感数据的所有路径，以及路径上需要触发的事件序列。根据事件空间的约束
+找到一条适合的路径，通常来说是最短那条，约束就是和路径无关的事件被排除，找到直接
+和敏感数据操作有关的方法和在生命周期中还存在的其他前置方法。</p>
+<p>做了一个动态分析平台，能够自动化模拟用户操作、填充数据，找到敏感信息被传输的路径。
+并在View中对活动的控件和传输的消息进行标红。</p>
+<p>文章定义了敏感信息，但是缺少对敏感信息的定位，从文中来看似乎是只对已知的消息（特
+定的含敏感信息对象的方法调用）进行符号执行分析，如果能够对定位敏感消息本身再捕获
+消息的执行路径应当能够发现更多的行为。</p>
+<h1 id="uipicker">UIPicker</h1>
+<p>首先是我们日常使用的应用程序大量都有UIP，可视的用户隐私信息。</p>
+<p>他们的工作主要是能够在程序中发现UIP，这对污点跟踪那边需要的确定污染源是一样子的
+工作，当然他们的性能肯定更好一些，也能够为后面或前面的工作服务。</p>
+<p>主要区分输入内容中的隐私内容，也考虑了输入框中的描述属性，同时不止输入框，下拉
+菜单这类也可能存在用户隐私。</p>
+<p>主要将隐私信息分为了三类：用户凭证、用户资料、位置信息和金融信息。但实际上要识
+别得更多，因为是看模型。</p>
+<p>最后判断是通过模型的输出分类和程序的行为共同判断的。</p>
+<p>预处理是解包分析布局文件，找到含有UIP的代码片段用聚类进行分类。再通过有监督的
+学习对UIP元素进行识别定位。同时排除非用户主动的输入，明显的特征就是用户有关的
+一般会有确定按钮。</p>
+<h2 id="预处理">预处理</h2>
+<p>提取布局文件中的控件文字和布局描述，进行分词去除连写或符号进行连接的对词的影
+响，还去除了数字、标点和禁用词。随后将词性进行还原。</p>
+<h2 id="分析隐私相关文本">分析隐私相关文本</h2>
+<p>选取控件文本和预选取的种子文本进行卡方运算，通过计算名词与动词和人称代词相互
+之间的距离，选取高关联度的认为是隐私相关的。</p>
+<h2 id="识别用户隐私数据元素">识别用户隐私数据元素</h2>
+<p>利用上一阶段识别出来的隐私相关文字（一个页面），将布局描述有简写的用人工创建
+的映射表进行还原。考虑元素周围元素给出的信息，比如输入框前的Text元素可能有对
+输入框的描述。</p>
+<p>标记所有元素的敏感属性，这里还是没有理解到他们特征的shape，姑且认为是对敏感
+属性的one-hot编码。最后使用SVM分类器。</p>
+<h2 id="行为过滤结果">行为过滤结果</h2>
+<p>判断上面找到的元素是否接收的是用户的输入，而调用的输入接口的时机一般在触发系
+统的回调函数中。</p>
+<p><strong>这里有个问题在于如果程序是先保存再读取数据，那么在这一步该方法会被绕过</strong></p>
+<h2 id="运行时提示">运行时提示</h2>
+<p>对纯文本和不安全的SSL进行提示。不安全SSL利用MalloDroid识别，FlowDroid用来找到
+隐私信息在不安全SSL传输并提示用户。利用TaintDroid的污点标记标记SSL不安全的资
+源。</p>
+<h2 id="贡献">贡献</h2>
+<p>他们的贡献是从新的角度也就是用户的输入出发对用户隐私泄漏进行考虑，同时还考虑
+了用户不能够输入但是可以通过系统API获得的隐私信息比如位置、设备标识等。此外
+用户输入方面除了输入文本框，相对以前的工作也考虑了其他的比如下拉菜单中可能存
+在隐私信息，因此使用了控件文字和布局描述确定一个元素是不是隐私信息，如果是的
+话进入到后面当信息被不安全传出的时候阻断并弹出用户提示。</p>
+<p>在文中他们也提到了，像Steam这样是通过WebView传输的用户凭证目前是无能为力的。
+一个解决方法是在传参发包时检查发送的内容，因为那些变量也类似是UI Text，
+可以继续使用原系统分析。</p>
+<p>另外就是后面他们方法使用的从程序执行角度进行判断是不是用户的“输入”行为，
+如果程序首先将用户的输入因为某些需求先存储了起来，再使用程序的api进行读取并
+传出设备，这样就会导致后面这一步行为被认为非用户输入，导致程序判断出错。我能
+想到的解决方案就是类似污点追踪的对所有输入的值都应该打上tag，否则第二次引用
+就不会认为是用户“输入”的了。</p>
+
+
+
+      
+    </article>
+    
+      
+          <br>
+          <hr>
+          <div class="post-comment">
+          
+          
+<div class="post bg-white">
+    <script src="https://utteranc.es/client.js"
+          repo="Tsingv/tsingv.github.io"
+          issue-term="title"
+          theme="github-light"
+          crossorigin="anonymous"
+          async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+</div>
+          </div>
+      
+  </div>
+
+        </div><footer>
+  <div class="container">
+    <p class="credits copyright">
+      <p class="credits theme-by">
+        Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;/&nbsp;Theme&nbsp;<a href="https://github.com/Tsingv/HugoTeX">HugoTeX</a>
+        <br>
+        <a href="https://sur.moe/about">Tsingv</a>
+        &copy;
+        2021
+      </p>
+  </div>
+</footer></body>
+</html>
