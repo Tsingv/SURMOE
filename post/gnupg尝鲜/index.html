@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-us"><meta charset="utf-8" />
 
-  <title>Things - No Wander</title>
+  <title>GnuPG尝鲜 - No Wander</title>
 
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -30,7 +30,7 @@
     <div class="container">
       <div class="post-heading">
         
-          <h1>Things</h1>
+          <h1>GnuPG尝鲜</h1>
           
         
       </div>
@@ -42,18 +42,21 @@
     <article class="article" class="blog-post">
       <div class="postmeta">
         <span class="meta-post">
-  <i class="fa fa-calendar-alt"></i>Jan 16, 2020
+  <i class="fa fa-calendar-alt"></i>Jul 1, 2021
   
 </span>
       </div>
       <br>
       
-    <ul>
-<li>界面不是要花哨和酷炫，而是要实用，要让生产力达到最大化</li>
-<li>过程化考核是来真的不是其他的</li>
-<li>英语是硬伤</li>
-<li>惊喜总是陪伴着的</li>
-</ul>
+    <p>gpg好呀，一键加解密签名。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gpg --full-gen-key
+</code></pre></div><p>上述可以创建一个密钥对。</p>
+<p>使用<code>send-key</code>上传到keyserver让别人能用你的公钥。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gpg --send-key YOURKEYID
+</code></pre></div><p>上述不用担心，就算输的是私钥ID上传的也是公钥，可以利用<code>--list-signature</code>查看公钥的ID.</p>
+<p>在选择keyserver的时候，我的GnuPG版本是2.2.28，在使用sks的公钥服务器会返回&quot;No name&quot;的错误，使用mit的公钥服务器会返回&quot;No keyserver available&quot;的错误。</p>
+<p>但是使用ubuntu的<code>keyserver.ubuntu.com</code>是可以的。keyserver除了在<code>~/.gnupg/gpg.conf</code>或者<code>~/.gnupg/dirmngr</code>中持久化指定外，在命令行可以使用<code>--keyserver</code>进行指定，默认是hkp但是hkps也可以使用。</p>
+<p>Good Luck.</p>
 
 
 
