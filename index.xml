@@ -8,7 +8,16 @@
     <language>en-us</language>
     <managingEditor>tsingv@outlook.com (Tsingv)</managingEditor>
     <webMaster>tsingv@outlook.com (Tsingv)</webMaster>
-    <lastBuildDate>Sun, 28 Aug 2022 13:35:00 +0800</lastBuildDate><atom:link href="https://sur.moe/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 29 Aug 2022 23:57:18 +0800</lastBuildDate><atom:link href="https://sur.moe/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Unzip乱码</title>
+      <link>https://sur.moe/post/unzip%E4%B9%B1%E7%A0%81/</link>
+      <pubDate>Mon, 29 Aug 2022 23:57:18 +0800</pubDate>
+      <author>tsingv@outlook.com (Tsingv)</author>
+      <guid>https://sur.moe/post/unzip%E4%B9%B1%E7%A0%81/</guid>
+      <description>使用unzip -O cp936可以尝试。本机系统Archlinux。 致谢 Linux 下 zip 文件解压乱码如何解决？</description>
+    </item>
+    
     <item>
       <title>Nmcli连接802 1x网络(EAP)</title>
       <link>https://sur.moe/post/nmcli%E8%BF%9E%E6%8E%A5802-1x%E7%BD%91%E7%BB%9Ceap/</link>
