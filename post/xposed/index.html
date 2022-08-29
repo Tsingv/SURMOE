@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en-us"><meta charset="utf-8" />
+
+  <title>Xposed - No Wander</title>
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="https://sur.moe/css/latex.css" />
+<link rel="stylesheet" href="https://sur.moe/css/main.css" />
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="generator" content="Hugo 0.80.0" /><body>
+
+
+
+
+
+
+<header>
+  <nav class="navbar">
+  <div class="nav">
+    
+
+    <ul class="nav-links">
+      
+    </ul>
+  </div>
+</nav>
+  <div class="intro-header">
+    <div class="container">
+      <div class="post-heading">
+        
+          <h1>Xposed</h1>
+          
+        
+      </div>
+    </div>
+  </div>
+</header>
+<div id="content">
+  <div class="container" role="main">
+    <article class="article" class="blog-post">
+      <div class="postmeta">
+        <span class="meta-post">
+  <i class="fa fa-calendar-alt"></i>Jan 31, 2021
+  
+</span>
+      </div>
+      <br>
+      
+    <h1 id="起因">起因</h1>
+<p>近期要对Xposed模块进行开发，然后需要了解下一些函数的用法</p>
+<h1 id="tips">Tips</h1>
+<ul>
+<li>
+<p>可以使用阿里maven源加速</p>
+</li>
+<li>
+<p>在File -&gt; Settings -&gt; Build, Execution, Deployment -&gt; Debugger -&gt; HotSwap 中取消Enable，这样才可以直接Run，<a href="https://github.com/rovo89/XposedBridge/wiki/Using-the-Xposed-Framework-API">官方文档</a>说的，以前叫Instant Run.</p>
+<p><img src="pic/HotSwap.png" alt="HotSwap"></p>
+</li>
+<li>
+<p>同样在官方文档要使用provided包含Xposed的API而不能是implementation</p>
+</li>
+</ul>
+<h1 id="一些使用">一些使用</h1>
+<h2 id="模块构建">模块构建</h2>
+<p>在AndroidManifest.xml中添加一些字段，使得Xposed框架能够识别为Xposed模块，在application中添加。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;meta-data</span>
+    <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;xposedmodule&#34;</span>
+    <span style="color:#a6e22e">android:value=</span><span style="color:#e6db74">&#34;true&#34;</span> <span style="color:#f92672">/&gt;</span>
+<span style="color:#f92672">&lt;meta-data</span>
+    <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;xposeddescription&#34;</span>
+    <span style="color:#a6e22e">android:value=</span><span style="color:#e6db74">&#34;Example MOdule&#34;</span> <span style="color:#f92672">/&gt;</span>
+<span style="color:#f92672">&lt;meta-data</span>
+    <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;xposedminversion&#34;</span>
+    <span style="color:#a6e22e">android:value=</span><span style="color:#e6db74">&#34;82&#34;</span> <span style="color:#f92672">/&gt;</span>
+</code></pre></div><p>你写一个类，在Somewhere，里面就有Hook函数。新建或找到assets文件夹，有的看起来是和java同一层实际上是在src/main/中</p>
+<p><img src="pic/asserts.png" alt="assets">
+<img src="pic/assets2.png" alt="assets2"></p>
+<p>每次模块更新记得reboot</p>
+<h2 id="对hook函数">对Hook函数</h2>
+<h3 id="hook静态变量">Hook静态变量</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Class cla <span style="color:#f92672">=</span> XposedHelpers<span style="color:#f92672">.</span><span style="color:#a6e22e">findClass</span><span style="color:#f92672">(</span>claName<span style="color:#f92672">,</span> loadPackageParam<span style="color:#f92672">.</span><span style="color:#a6e22e">classLoader</span><span style="color:#f92672">);</span>
+XposedHelpers<span style="color:#f92672">.</span><span style="color:#a6e22e">setStaticBooleanField</span><span style="color:#f92672">(</span>cla<span style="color:#f92672">,</span> fieldName<span style="color:#f92672">,</span> val<span style="color:#f92672">);</span>
+</code></pre></div><p>其他set函数</p>
+<p><img src="pic/XposedHelpers.set*.png.png" alt="XposedHelpers.set*"></p>
+<h3 id="hook修改方法返回值">Hook修改方法返回值</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">XposedHelpers<span style="color:#f92672">.</span><span style="color:#a6e22e">findAndHookMethod</span><span style="color:#f92672">(</span>class<span style="color:#f92672">,</span> method<span style="color:#f92672">,</span> <span style="color:#66d9ef">new</span> XC_MethodHook<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">afterHookedMethod</span><span style="color:#f92672">(</span>MethodHookParam param<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> Throwable <span style="color:#f92672">{</span>
+        param<span style="color:#f92672">.</span><span style="color:#a6e22e">setResult</span><span style="color:#f92672">(</span>result<span style="color:#f92672">);</span>  <span style="color:#75715e">// 设置返回值
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+<span style="color:#f92672">});</span>
+</code></pre></div><h3 id="hook获取方法返回值">Hook获取方法返回值</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">XposedHelpers<span style="color:#f92672">.</span><span style="color:#a6e22e">findAndHookMethod</span><span style="color:#f92672">(</span>class<span style="color:#f92672">,</span> method<span style="color:#f92672">,</span> <span style="color:#66d9ef">new</span> XC_MethodHook<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">afterHookedMethod</span><span style="color:#f92672">(</span>MethodHookParam param<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> Throwable <span style="color:#f92672">{</span>
+        param<span style="color:#f92672">.</span><span style="color:#a6e22e">getResult</span><span style="color:#f92672">(</span>result<span style="color:#f92672">);</span>  <span style="color:#75715e">// 获取返回值
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+<span style="color:#f92672">});</span>
+</code></pre></div><h3 id="hook获取方法传入参数">Hook获取方法传入参数</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">XposedHelpers<span style="color:#f92672">.</span><span style="color:#a6e22e">findAndHookMethod</span><span style="color:#f92672">(</span>class<span style="color:#f92672">,</span> method<span style="color:#f92672">,</span> <span style="color:#66d9ef">new</span> XC_MethodHook<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">afterHookedMethod</span><span style="color:#f92672">(</span>MethodHookParam param<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> Throwable <span style="color:#f92672">{</span>
+        XposedBridge<span style="color:#f92672">.</span><span style="color:#a6e22e">log</span><span style="color:#f92672">(</span>param<span style="color:#f92672">.</span><span style="color:#a6e22e">args</span><span style="color:#f92672">[</span>0<span style="color:#f92672">]);</span> <span style="color:#75715e">//第0个参数
+</span><span style="color:#75715e"></span>        XposedBridge<span style="color:#f92672">.</span><span style="color:#a6e22e">log</span><span style="color:#f92672">(</span>param<span style="color:#f92672">.</span><span style="color:#a6e22e">args</span><span style="color:#f92672">[</span>1<span style="color:#f92672">]);</span>
+        XposedBridge<span style="color:#f92672">.</span><span style="color:#a6e22e">log</span><span style="color:#f92672">(</span>param<span style="color:#f92672">.</span><span style="color:#a6e22e">args</span><span style="color:#f92672">[</span>2<span style="color:#f92672">]);</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">});</span>
+</code></pre></div><h3 id="hook给方法传参">Hook给方法传参</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Class cla <span style="color:#f92672">=</span> XposedHelpers<span style="color:#f92672">.</span><span style="color:#a6e22e">findClass</span><span style="color:#f92672">(</span>className<span style="color:#f92672">,</span> loadPackageParam<span style="color:#f92672">.</span><span style="color:#a6e22e">classLoader</span><span style="color:#f92672">);</span>
+Object com <span style="color:#f92672">=</span> XposedHelpers<span style="color:#f92672">.</span><span style="color:#a6e22e">callStaticMethod</span><span style="color:#f92672">(</span>cla<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;getInstance&#34;</span><span style="color:#f92672">);</span>
+XposedHelpers<span style="color:#f92672">.</span><span style="color:#a6e22e">callMethod</span><span style="color:#f92672">(</span>com<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;setDebug&#34;</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">);</span> <span style="color:#75715e">// 传入指定值
+</span></code></pre></div><h3 id="hook获取intent的值">*Hook获取Intent的值</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">hookGetIntent</span><span style="color:#f92672">(</span>XC_LoadPackage<span style="color:#f92672">.</span><span style="color:#a6e22e">LoadPackageParam</span> loadPackageParam<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    XposedHelpers<span style="color:#f92672">.</span><span style="color:#a6e22e">findAndHookMethod</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;android.app.Activity&#34;</span><span style="color:#f92672">,</span> loadPackageParam<span style="color:#f92672">.</span><span style="color:#a6e22e">classLoader</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;getIntent&#34;</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">new</span> XC_MethodHook<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#a6e22e">@Override</span>
+        <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">afterHookedMethod</span><span style="color:#f92672">(</span>MethodHookParam param<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> Throwable <span style="color:#f92672">{</span>
+            Intent sou <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>Intent<span style="color:#f92672">)</span> param<span style="color:#f92672">.</span><span style="color:#a6e22e">getResult</span><span style="color:#f92672">();</span>
+            KLog<span style="color:#f92672">.</span><span style="color:#a6e22e">d</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;hookGetIntent:&#34;</span> <span style="color:#f92672">+</span> sou<span style="color:#f92672">.</span><span style="color:#a6e22e">toURI</span><span style="color:#f92672">().</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">());</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">});</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h3 id="hook发送intent信息">*Hook发送Intent信息</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">hookGetIntent</span><span style="color:#f92672">(</span>XC_LoadPackage<span style="color:#f92672">.</span><span style="color:#a6e22e">LoadPackageParam</span> loadPackageParam<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    XposedHelpers<span style="color:#f92672">.</span><span style="color:#a6e22e">findAndHookMethod</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;android.app.ContextWrapper&#34;</span><span style="color:#f92672">,</span> loadPackageParam<span style="color:#f92672">.</span><span style="color:#a6e22e">classLoader</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;sendBroadcast&#34;</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">new</span> XC_MethodHook<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#a6e22e">@Override</span>
+        <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">afterHookedMethod</span><span style="color:#f92672">(</span>MethodHookParam param<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> Throwable <span style="color:#f92672">{</span>
+            Intent sou <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>Intent<span style="color:#f92672">)</span> param<span style="color:#f92672">.</span><span style="color:#a6e22e">args</span><span style="color:#f92672">[</span>0<span style="color:#f92672">];</span>
+            KLog<span style="color:#f92672">.</span><span style="color:#a6e22e">d</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;sendBroadcast:&#34;</span> <span style="color:#f92672">+</span> sou<span style="color:#f92672">.</span><span style="color:#a6e22e">toURI</span><span style="color:#f92672">().</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">());</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">});</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h2 id="多dex问题">*多Dex问题</h2>
+<p>一个App有多个Dex文件的话，可能导致类名路径正确但是却无法找到类，这时需要获取Dex文件的上下文环境。</p>
+<p>Android在加载Dex文件后会创建Activity类，然后调用attach方法，调用时的参数为上下文Context。同时该方法是Final方法（不可被子类覆写），不会因为被覆盖而Hook失效，利用上下文获取Classload，随后Hook到Multidex的类。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">XposedHelpers<span style="color:#f92672">.</span><span style="color:#a6e22e">findAndHookMethod</span><span style="color:#f92672">(</span>Application<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;attach&#34;</span><span style="color:#f92672">,</span> Context<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">new</span> XC_MethodHook<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">afterHookedMethod</span><span style="color:#f92672">(</span>MethodHookParam param<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> Throwable <span style="color:#f92672">{</span>
+        ClassLoader cl <span style="color:#f92672">=</span> <span style="color:#f92672">((</span>Context<span style="color:#f92672">)</span> param<span style="color:#f92672">.</span><span style="color:#a6e22e">args</span><span style="color:#f92672">[</span>0<span style="color:#f92672">]).</span><span style="color:#a6e22e">getClassLoader</span><span style="color:#f92672">();</span> <span style="color:#75715e">// 获取ClassLoader
+</span><span style="color:#75715e"></span>        Class<span style="color:#f92672">&lt;?&gt;</span> hookClass <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+        hookClass <span style="color:#f92672">=</span> cl<span style="color:#f92672">.</span><span style="color:#a6e22e">loadClass</span><span style="color:#f92672">(</span>claName<span style="color:#f92672">);</span> <span style="color:#75715e">// 获取Class
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// 使用cl 和 hookClass 完成hook
+</span><span style="color:#75715e"></span>        XposedHelpers<span style="color:#f92672">.</span><span style="color:#a6e22e">setStaticIntField</span><span style="color:#f92672">(</span>hookClass<span style="color:#f92672">,</span> fieldName<span style="color:#f92672">,</span> val<span style="color:#f92672">);</span>
+        XposedHelpers<span style="color:#f92672">.</span><span style="color:#a6e22e">findAndHookMethod</span><span style="color:#f92672">(</span>claName<span style="color:#f92672">,</span> cl<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;i&#34;</span><span style="color:#f92672">,</span> String<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">,</span> String<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">,</span> Object<span style="color:#f92672">[].</span><span style="color:#a6e22e">class</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">new</span> XC_MethodHook<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+            <span style="color:#a6e22e">@Override</span>
+            <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">afterHookedMethod</span><span style="color:#f92672">(</span>MethodHookParam param<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> Throwable <span style="color:#f92672">{</span>
+                XposedBridge<span style="color:#f92672">.</span><span style="color:#a6e22e">log</span><span style="color:#f92672">(</span>TAG <span style="color:#f92672">+</span> param<span style="color:#f92672">.</span><span style="color:#a6e22e">args</span><span style="color:#f92672">[</span>0<span style="color:#f92672">]);</span>
+                XposedBridge<span style="color:#f92672">.</span><span style="color:#a6e22e">log</span><span style="color:#f92672">(</span>TAG <span style="color:#f92672">+</span> param<span style="color:#f92672">.</span><span style="color:#a6e22e">args</span><span style="color:#f92672">[</span>1<span style="color:#f92672">]);</span>
+                XposedBridge<span style="color:#f92672">.</span><span style="color:#a6e22e">log</span><span style="color:#f92672">(</span>TAG <span style="color:#f92672">+</span> param<span style="color:#f92672">.</span><span style="color:#a6e22e">args</span><span style="color:#f92672">[</span>2<span style="color:#f92672">]);</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">});</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">});</span>
+</code></pre></div><h1 id="引用">引用</h1>
+<blockquote>
+<p><a href="https://juejin.cn/post/6844903608505352206">Xposed使用教程</a></p>
+</blockquote>
+<blockquote>
+<p><a href="https://github.com/rovo89/XposedBridge/wiki/Using-the-Xposed-Framework-API">Using the Xposed Framework API</a></p>
+</blockquote>
+<ul>
+<li>*表示没有使用过还</li>
+</ul>
+
+
+
+      
+    </article>
+    
+      
+          <br>
+          <hr>
+          <div class="post-comment">
+          
+          
+<div class="post bg-white">
+    <script src="https://utteranc.es/client.js"
+          repo="Tsingv/tsingv.github.io"
+          issue-term="title"
+          theme="github-light"
+          crossorigin="anonymous"
+          async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+</div>
+          </div>
+      
+  </div>
+
+        </div><footer>
+  <div class="container">
+    <p class="credits copyright">
+      <p class="credits theme-by">
+        Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;/&nbsp;Theme&nbsp;<a href="https://github.com/Tsingv/HugoTeX">HugoTeX</a>
+        <br>
+        <a href="https://sur.moe/about">Tsingv</a>
+        &copy;
+        2021
+      </p>
+  </div>
+</footer></body>
+</html>

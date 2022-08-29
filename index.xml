@@ -8,7 +8,16 @@
     <language>en-us</language>
     <managingEditor>tsingv@outlook.com (Tsingv)</managingEditor>
     <webMaster>tsingv@outlook.com (Tsingv)</webMaster>
-    <lastBuildDate>Mon, 25 Jan 2021 19:39:00 +0800</lastBuildDate><atom:link href="https://sur.moe/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 31 Jan 2021 11:19:42 +0800</lastBuildDate><atom:link href="https://sur.moe/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Xposed</title>
+      <link>https://sur.moe/post/xposed/</link>
+      <pubDate>Sun, 31 Jan 2021 11:19:42 +0800</pubDate>
+      <author>tsingv@outlook.com (Tsingv)</author>
+      <guid>https://sur.moe/post/xposed/</guid>
+      <description>起因 近期要对Xposed模块进行开发，然后需要了解下一些函数的用法 Tips 可以使用阿里maven源加速 在File -&amp;gt; Settings -&amp;gt; Build, Execution, Deployment -&amp;gt; Debugger -&amp;gt; HotSwap 中取消Enab</description>
+    </item>
+    
     <item>
       <title>LUKS&amp;TPM2</title>
       <link>https://sur.moe/post/lukstpm2/</link>
