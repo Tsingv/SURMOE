@@ -2,80 +2,80 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on No Wander</title>
-    <link>/post/</link>
+    <link>https://sur.moe/post/</link>
     <description>Recent content in Posts on No Wander</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 25 Jan 2021 19:39:00 +0800</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 25 Jan 2021 19:39:00 +0800</lastBuildDate><atom:link href="https://sur.moe/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>LUKS&amp;TPM2</title>
-      <link>/post/lukstpm2/</link>
+      <link>https://sur.moe/post/lukstpm2/</link>
       <pubDate>Mon, 25 Jan 2021 19:39:00 +0800</pubDate>
       
-      <guid>/post/lukstpm2/</guid>
+      <guid>https://sur.moe/post/lukstpm2/</guid>
       <description>背景 同样的，在进行了全盘加密后每次boot都需要输入密钥对根目录进行解密，久而久之就会觉得挺麻烦的。在Windows下使用的BitLocke</description>
     </item>
     
     <item>
       <title>Forst</title>
-      <link>/post/forst/</link>
+      <link>https://sur.moe/post/forst/</link>
       <pubDate>Mon, 11 Jan 2021 16:28:39 +0800</pubDate>
       
-      <guid>/post/forst/</guid>
+      <guid>https://sur.moe/post/forst/</guid>
       <description>中文测试 $\int_1^3$</description>
     </item>
     
     <item>
       <title>Awk</title>
-      <link>/post/awk/</link>
+      <link>https://sur.moe/post/awk/</link>
       <pubDate>Tue, 04 Feb 2020 15:20:37 +0800</pubDate>
       
-      <guid>/post/awk/</guid>
+      <guid>https://sur.moe/post/awk/</guid>
       <description>awk Useage 1.命令行方式 awk [-F field-separator] &amp;#39;commands&amp;#39; input-file(s) 其中，commands 是真正awk命令，[-F域分隔符]是可选的。 input-file(s) 是待处理的文件。 在awk中，文件的每一行中，</description>
     </item>
     
     <item>
       <title>Dm-Crypt</title>
-      <link>/post/dm-crypt/</link>
+      <link>https://sur.moe/post/dm-crypt/</link>
       <pubDate>Tue, 28 Jan 2020 20:11:23 +0800</pubDate>
       
-      <guid>/post/dm-crypt/</guid>
+      <guid>https://sur.moe/post/dm-crypt/</guid>
       <description>起因 在编程随想上看到了linux下的全盘加密，我觉得我是有这样的需求的，因此参阅一些资料完成了全盘的加密。 操作 首先对磁盘进行备份，这里使用的</description>
     </item>
     
     <item>
       <title>Things</title>
-      <link>/post/things/</link>
+      <link>https://sur.moe/post/things/</link>
       <pubDate>Thu, 16 Jan 2020 23:40:10 +0800</pubDate>
       
-      <guid>/post/things/</guid>
+      <guid>https://sur.moe/post/things/</guid>
       <description>界面不是要花哨和酷炫，而是要实用，要让生产力达到最大化 过程化考核是来真的不是其他的 英语是硬伤 惊喜总是陪伴着的</description>
     </item>
     
     <item>
       <title>WaylandTest</title>
-      <link>/post/waylandtest/</link>
+      <link>https://sur.moe/post/waylandtest/</link>
       <pubDate>Mon, 16 Dec 2019 19:20:12 +0800</pubDate>
       
-      <guid>/post/waylandtest/</guid>
+      <guid>https://sur.moe/post/waylandtest/</guid>
       <description>Wayland First? Test 不知道怎么说，Wayland是个新东西而且理论上确实比X更加的高效，但是不幸的是其还是太新的，很多应用并没有适配wayland协议，导</description>
     </item>
     
     <item>
       <title>DataStruct</title>
-      <link>/post/datastruct/</link>
+      <link>https://sur.moe/post/datastruct/</link>
       <pubDate>Thu, 24 Oct 2019 16:49:09 +0800</pubDate>
       
-      <guid>/post/datastruct/</guid>
+      <guid>https://sur.moe/post/datastruct/</guid>
       <description>DataStruct a[n][m] = a + m*n + m</description>
     </item>
     
     <item>
       <title>Brower</title>
-      <link>/post/brower/</link>
+      <link>https://sur.moe/post/brower/</link>
       <pubDate>Mon, 09 Sep 2019 17:43:42 +0800</pubDate>
       
-      <guid>/post/brower/</guid>
+      <guid>https://sur.moe/post/brower/</guid>
       <description>&lt;h2 id=&#34;标记语言&#34;&gt;标记语言&lt;/h2&gt;
 &lt;p&gt;HTML&lt;br&gt;
 XML 人类不友好&lt;/p&gt;
@@ -92,10 +92,10 @@ Access-Control-Allow-Origin:*&lt;/p&gt;</description>
     
     <item>
       <title>Hugo&#43;Caddy</title>
-      <link>/post/hugo&#43;caddy/</link>
+      <link>https://sur.moe/post/hugo&#43;caddy/</link>
       <pubDate>Sat, 07 Sep 2019 00:07:31 +0800</pubDate>
       
-      <guid>/post/hugo&#43;caddy/</guid>
+      <guid>https://sur.moe/post/hugo&#43;caddy/</guid>
       <description>&lt;p&gt;#环境配置&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Hugo : &lt;a href=&#34;https://github.com/gohugoio/hugo/releases&#34;&gt;hugo的下载地址(github)&lt;/a&gt;&lt;br&gt;

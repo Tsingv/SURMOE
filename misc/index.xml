@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Miscs on No Wander</title>
-    <link>/misc/</link>
+    <link>https://sur.moe/misc/</link>
     <description>Recent content in Miscs on No Wander</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 11 Jan 2021 16:02:35 +0800</lastBuildDate><atom:link href="/misc/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 11 Jan 2021 16:02:35 +0800</lastBuildDate><atom:link href="https://sur.moe/misc/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>First</title>
-      <link>/misc/first/</link>
+      <link>https://sur.moe/misc/first/</link>
       <pubDate>Mon, 11 Jan 2021 16:02:35 +0800</pubDate>
       
-      <guid>/misc/first/</guid>
+      <guid>https://sur.moe/misc/first/</guid>
       <description>I build my site again, this time no deploy with Github.中文测试</description>
     </item>
     
