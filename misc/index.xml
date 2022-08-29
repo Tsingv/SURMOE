@@ -6,12 +6,14 @@
     <description>Recent content in Miscs on No Wander</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <managingEditor>tsingv@outlook.com (Tsingv)</managingEditor>
+    <webMaster>tsingv@outlook.com (Tsingv)</webMaster>
     <lastBuildDate>Mon, 11 Jan 2021 16:02:35 +0800</lastBuildDate><atom:link href="/misc/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>First</title>
       <link>/misc/first/</link>
       <pubDate>Mon, 11 Jan 2021 16:02:35 +0800</pubDate>
-      
+      <author>tsingv@outlook.com (Tsingv)</author>
       <guid>/misc/first/</guid>
       <description>I build my site again, this time no deploy with Github.中文测试</description>
     </item>
