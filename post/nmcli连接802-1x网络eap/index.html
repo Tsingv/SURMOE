@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en-us"><meta charset="utf-8" />
+
+  <title>Nmcli连接802 1x网络(EAP) - No Wander</title>
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="https://sur.moe/css/latex.css" />
+<link rel="stylesheet" href="https://sur.moe/css/main.css" />
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="generator" content="Hugo 0.101.0" /><body>
+
+
+
+
+
+
+<header>
+  <nav class="navbar">
+  <div class="nav">
+    
+
+    <ul class="nav-links">
+      
+    </ul>
+  </div>
+</nav>
+  <div class="intro-header">
+    <div class="container">
+      <div class="post-heading">
+        
+          <h1>Nmcli连接802 1x网络(EAP)</h1>
+          
+        
+      </div>
+    </div>
+  </div>
+</header>
+<div id="content">
+  <div class="container" role="main">
+    <article class="article" class="blog-post">
+      <div class="postmeta">
+        <span class="meta-post">
+  <i class="fa fa-calendar-alt"></i>Aug 28, 2022
+  
+</span>
+      </div>
+      <br>
+      
+    <h1 id="步骤">步骤</h1>
+<p>近日，连接校园网发现学校采用的WPA2-Enterprise，遂记录一下。</p>
+<p>传统的WPA2-Personal可以直接使用<code>nmcli device wifi connect &lt;SSID&gt; password &lt;PASSWORD&gt;</code>进行连接。</p>
+<p>WPA2-Enterprise的连接不能够依靠<code>nmtui</code>完成，因为其不支持，但是<code>nmcli</code>是没有问题的，直接新建连接搞定它：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmcli connection add <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>type wifi <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>con-name &lt;CONNECTION NAME&gt; <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>ifname &lt;INTERFACE NAME&gt; <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>ssid &lt;SSID&gt; <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>-- <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>wifi-sec.key-mgmt wpa-eap <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>802-1x.eap ttls <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>802-1x.phase2-auth mschapv2 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>802-1x.identity &lt;USERNAME&gt; <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>802-1x.password &lt;PASSWORD&gt;
+</span></span></code></pre></div><p>上面每一行是一个选项，大多都是对照收集上面完成的设置。</p>
+<p><code>ttls</code>选项是表示用账户密码登陆，不需要证书。</p>
+<p><code>tls</code>选项需要设置证书进行连接，一些选项为：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>802-1x.ca-cert &lt;ca.pem&gt; <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>802-1x.client-cert &lt;cert.pem&gt; <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>802-1x.private-key-password &lt;PASSWORD&gt; <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>802-1x.private-key &lt;key.pem&gt;
+</span></span></code></pre></div><p>注意的是最后两个选项的顺序似乎有关系，使用证书就不用<code>802-1x.phase2-auth</code>选项啦。</p>
+<h1 id="致谢">致谢</h1>
+<blockquote>
+<p><a href="https://qa.1r1g.cn/unix/ask/10175651/">如何通过 nmcli 连接到 802.1x 无线网络</a></p>
+</blockquote>
+
+
+
+      
+    </article>
+    
+      
+          <br>
+          <hr>
+          <div class="post-comment">
+          
+          
+<div class="post bg-white">
+    <script src="https://utteranc.es/client.js"
+          repo="Tsingv/tsingv.github.io"
+          issue-term="title"
+          theme="github-light"
+          crossorigin="anonymous"
+          async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+</div>
+          </div>
+      
+  </div>
+
+        </div><footer>
+  <div class="container">
+    <p class="credits copyright">
+      <p class="credits theme-by">
+        Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;/&nbsp;Theme&nbsp;<a href="https://github.com/Tsingv/HugoTeX">HugoTeX</a>
+        <br>
+        <a href="https://sur.moe/about">Tsingv</a>
+        &copy;
+        2022
+      </p>
+  </div>
+</footer></body>
+</html>
