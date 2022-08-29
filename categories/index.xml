@@ -2,11 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on No Wander</title>
-    <link>/categories/</link>
+    <link>https://sur.moe/categories/</link>
     <description>Recent content in Categories on No Wander</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>tsingv@outlook.com (Tsingv)</managingEditor>
-    <webMaster>tsingv@outlook.com (Tsingv)</webMaster><atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+    <webMaster>tsingv@outlook.com (Tsingv)</webMaster><atom:link href="https://sur.moe/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
