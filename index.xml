@@ -8,7 +8,16 @@
     <language>en-us</language>
     <managingEditor>tsingv@outlook.com (Tsingv)</managingEditor>
     <webMaster>tsingv@outlook.com (Tsingv)</webMaster>
-    <lastBuildDate>Mon, 29 Aug 2022 23:57:18 +0800</lastBuildDate><atom:link href="https://sur.moe/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 20 Sep 2022 18:57:41 +0800</lastBuildDate><atom:link href="https://sur.moe/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AVD，安卓虚拟机的一些设置</title>
+      <link>https://sur.moe/post/avd%E5%AE%89%E5%8D%93%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E4%B8%80%E4%BA%9B%E8%AE%BE%E7%BD%AE/</link>
+      <pubDate>Tue, 20 Sep 2022 18:57:41 +0800</pubDate>
+      <author>tsingv@outlook.com (Tsingv)</author>
+      <guid>https://sur.moe/post/avd%E5%AE%89%E5%8D%93%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E4%B8%80%E4%BA%9B%E8%AE%BE%E7%BD%AE/</guid>
+      <description>(https://developer.android.com/studio/run/emulator-networking?hl=zh-cn) (https://developer.android.com/studio/run/emulator-console?hl=zh-cn)</description>
+    </item>
+    
     <item>
       <title>Unzip乱码</title>
       <link>https://sur.moe/post/unzip%E4%B9%B1%E7%A0%81/</link>
