@@ -48,7 +48,8 @@
       </div>
       <br>
       
-    <p>如题，之前切换输入法使用的是<code>fcitx.vim</code>这样一个插件，某次使用fcitx5后插件还没有适配。因此查看其代码后有了精简版本。</p>
+    <h1 id="vim输入法自动切换不使用插件">VIM输入法（自动）切换，不使用插件</h1>
+<p>如题，之前切换输入法使用的是<code>fcitx.vim</code>这样一个插件，某次使用fcitx5后插件还没有适配。因此查看其代码后有了精简版本。</p>
 <p>在插件的实现中使用了python的dbus库与<code>fcitx5-dbus</code>交互实现输入法切换和判断。</p>
 <p>实际使用<code>fcitx5-remote</code>即可以对输入法状态进行识别，代码如下：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">fcitx5state</span>=<span style="color:#a6e22e">system</span>(<span style="color:#e6db74">&#34;fcitx5-remote&#34;</span>)<span style="color:#960050;background-color:#1e0010">
@@ -58,8 +59,10 @@
 <p>以上</p>
 <h1 id="致谢">致谢</h1>
 <blockquote>
-<p><a href="https://www.w3cschool.cn/vim/1xa9oozt.html">https://www.w3cschool.cn/vim/1xa9oozt.html</a>
-<a href="https://github.com/vim-scripts/fcitx.vim">https://github.com/vim-scripts/fcitx.vim</a></p>
+<p><a href="https://www.w3cschool.cn/vim/1xa9oozt.html">https://www.w3cschool.cn/vim/1xa9oozt.html</a></p>
+</blockquote>
+<blockquote>
+<p><a href="https://github.com/vim-scripts/fcitx.vim">https://github.com/vim-scripts/fcitx.vim</a></p>
 </blockquote>
 
 
