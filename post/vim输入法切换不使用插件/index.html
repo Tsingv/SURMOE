@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en-us"><meta charset="utf-8" />
+
+  <title>VIM输入法切换，不使用插件 - No Wander</title>
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="https://sur.moe/css/latex.css" />
+<link rel="stylesheet" href="https://sur.moe/css/main.css" />
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="generator" content="Hugo 0.102.3" /><body>
+
+
+
+
+
+
+<header>
+  <nav class="navbar">
+  <div class="nav">
+    
+
+    <ul class="nav-links">
+      
+    </ul>
+  </div>
+</nav>
+  <div class="intro-header">
+    <div class="container">
+      <div class="post-heading">
+        
+          <h1>VIM输入法切换，不使用插件</h1>
+          
+        
+      </div>
+    </div>
+  </div>
+</header>
+<div id="content">
+  <div class="container" role="main">
+    <article class="article" class="blog-post">
+      <div class="postmeta">
+        <span class="meta-post">
+  <i class="fa fa-calendar-alt"></i>Sep 27, 2022
+  
+</span>
+      </div>
+      <br>
+      
+    <p>如题，之前切换输入法使用的是<code>fcitx.vim</code>这样一个插件，某次使用fcitx5后插件还没有适配。因此查看其代码后有了精简版本。</p>
+<p>在插件的实现中使用了python的dbus库与<code>fcitx5-dbus</code>交互实现输入法切换和判断。</p>
+<p>实际使用<code>fcitx5-remote</code>即可以对输入法状态进行识别，代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">fcitx5state</span>=<span style="color:#a6e22e">system</span>(<span style="color:#e6db74">&#34;fcitx5-remote&#34;</span>)<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">autocmd</span> <span style="color:#a6e22e">InsertLeave</span> * :<span style="color:#a6e22e">silent</span> <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">fcitx5state</span>=<span style="color:#a6e22e">system</span>(<span style="color:#e6db74">&#34;fcitx5-remote&#34;</span>)[<span style="color:#ae81ff">0</span>] | <span style="color:#a6e22e">silent</span> !<span style="color:#a6e22e">fcitx5</span>-<span style="color:#a6e22e">remote</span> -<span style="color:#a6e22e">c</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">autocmd</span> <span style="color:#a6e22e">InsertEnter</span> * :<span style="color:#a6e22e">silent</span> <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">fcitx5state</span> == <span style="color:#ae81ff">2</span> | <span style="color:#a6e22e">call</span> <span style="color:#a6e22e">system</span>(<span style="color:#e6db74">&#34;fcitx5-remote -o&#34;</span>) | <span style="color:#66d9ef">endif</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><p>很好理解，就是添加了一个变量判断是否为中文输入法（状态2为输入法已激活即中文输入法激活）。其中还有一个点是利用<code>|</code>实现的行分隔。</p>
+<p>以上</p>
+<h1 id="致谢">致谢</h1>
+<blockquote>
+<p><a href="https://www.w3cschool.cn/vim/1xa9oozt.html">https://www.w3cschool.cn/vim/1xa9oozt.html</a>
+<a href="https://github.com/vim-scripts/fcitx.vim">https://github.com/vim-scripts/fcitx.vim</a></p>
+</blockquote>
+
+
+
+      
+    </article>
+    
+      
+          <br>
+          <hr>
+          <div class="post-comment">
+          
+          
+<div class="post bg-white">
+    <script src="https://utteranc.es/client.js"
+          repo="Tsingv/tsingv.github.io"
+          issue-term="title"
+          theme="github-light"
+          crossorigin="anonymous"
+          async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+</div>
+          </div>
+      
+  </div>
+
+        </div><footer>
+  <div class="container">
+    <p class="credits copyright">
+      <p class="credits theme-by">
+        Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;/&nbsp;Theme&nbsp;<a href="https://github.com/Tsingv/HugoTeX">HugoTeX</a>
+        <br>
+        <a href="https://sur.moe/about">Tsingv</a>
+        &copy;
+        2022
+      </p>
+  </div>
+</footer></body>
+</html>
